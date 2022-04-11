@@ -1,0 +1,21 @@
+.tab {
+    &--enter-active,
+    &--leave-active {
+        transition-timing-function: ease-in-out;
+        transition-property: opacity, transform;
+        transition-duration: 350ms;
+    }
+
+    &--enter-from,
+    &--leave-to {
+        opacity: 0;
+    }
+
+    &--enter-from {
+        transform: translate3d(-6.25em, 0, 0);
+    }
+
+    &--leave-to {
+        transform: translate3d(6.25em, 0, 0);
+    }
+}
