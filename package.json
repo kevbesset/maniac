@@ -7,7 +7,11 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
+  "bin": {
+    "maniac": "./bin/index.js"
+  },
   "dependencies": {
+    "commander": "^9.1.0",
     "sass": "^1.50.0",
     "vue": "^3.2.25",
     "vue-router": "^4.0.14"
