@@ -1,27 +1,48 @@
 #!/usr/bin/env node
-const { program } = require('commander')
 
-program.name('maniac').description('my description').version('0.0.1')
+const { program } = require('commander')
+const { createNvmFile } = require('../lib/createNvmFile')
+const { createProject } = require('../lib/createProject')
+const { installPackage } = require('../lib/addPackage')
+
+program
+  .name('maniac')
+  .version('0.0.1', '-v, --version', 'output the current version')
+
+program
+  .command('create')
+  .description('create a project')
+  .argument('<project-name>', 'project name')
+  .action((name, options) => {
+    console.log('We create a project named', name)
+    createProject(name, options)
+  })
 
 program
   .command('add')
-  .description('add a package')
-  .arguments('<packages>', 'packages to add')
+  .description('add packages to your project')
+  .argument('<packages>', 'packages to add')
+  .option('-f, --force', 'overwrite files')
   .action((arg, options, action) => {
-    console.log('add packages', action.args)
-    /*
-    TODO:
-        - find package name in config.json
-        - handle required packages
-            - store package name complete in order to not repeat its install
-        - copy "files" with same path
-            - create folders if not exists
-            - create file if not exists
-            -> if options -f (--force) : overwrite files
-        - check if has storybook
-            -> yes: copy "stories" with same path
-            -> no: do nothing
-    */
+    const { args } = action
+
+    args.forEach((pkg) => {
+      installPackage(pkg, options)
+    })
+  })
+
+program
+  .command('doc')
+  .description('show design system')
+  .action(() => {
+    console.log('Start storybook')
+  })
+
+program
+  .command('nvm')
+  .description('create .nvmrc file')
+  .action((arg, options) => {
+    createNvmFile(options)
   })
 
 program.parse()

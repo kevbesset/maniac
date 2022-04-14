@@ -1,3 +1,9 @@
+// Directives
+@import './placeholder';
+
+// Transitions
+@import './transitions/page';
+
 html,
 body {
   box-sizing: border-box;
@@ -11,7 +17,7 @@ body {
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 
 a {
