@@ -241,7 +241,6 @@
 
       #{$block-selector}--pending & {
         color: transparent;
-        fill: transparent;
       }
     }
 

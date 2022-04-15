@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: center;
     color: currentColor;
+    animation: blink 0.8s linear infinite;
     cursor: wait;
 
     &__progress {
@@ -37,11 +38,12 @@
       &::before {
         border-color: currentColor;
         opacity: 0.3;
+        border-width: 0.0625em;
       }
 
       &::after {
         border-top-color: currentColor;
-        animation: spin 3s linear infinite;
+        animation: spin 1s linear infinite;
         opacity: 1;
       }
     }
@@ -49,6 +51,12 @@
     @keyframes spin {
       100% {
         transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    @keyframes blink {
+      40% {
+        opacity: 0;
       }
     }
   }
