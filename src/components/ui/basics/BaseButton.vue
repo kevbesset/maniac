@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import InfiniteLoader from '@/components/ui/loaders/InfiniteLoader.vue'
+  import ProgressCircular from '@/components/ui/progresses/ProgressCircular.vue'
   import BemTransition from '@/components/ui/transitions/BemTransition.vue'
   import { ButtonSize, ButtonTheme, ButtonType } from '@/vars/ButtonAttr'
   import { computed, useAttrs } from 'vue'
@@ -9,19 +9,22 @@
 
   const router = useRouter()
   const attrs = useAttrs()
-  const props =
-    defineProps<{
-      type?: ButtonType.BUTTON | ButtonType.SUBMIT
-      theme?: ButtonTheme
-      size?: ButtonSize
-      to?: RouteLocationRaw
-      href?: string
-      disabled?: boolean
-      pending?: boolean
-      block?: boolean
-      reverse?: boolean
-      rounded?: boolean
-    }>()
+  const props = defineProps<{
+    type?: ButtonType.BUTTON | ButtonType.SUBMIT
+    theme?: ButtonTheme
+    size?: ButtonSize
+    to?: RouteLocationRaw
+    href?: string
+    disabled?: boolean
+    pending?: boolean
+    block?: boolean
+    reverse?: boolean
+    rounded?: boolean
+    outlined?: boolean
+    tile?: boolean
+    depressed?: boolean
+    icon?: boolean
+  }>()
 
   const tag = computed(() =>
     props.disabled
@@ -56,8 +59,14 @@
       [`${BLOCK_CLASS}--disabled`]: props.disabled,
       [`${BLOCK_CLASS}--pending`]: props.pending,
       [`${BLOCK_CLASS}--block`]: props.block,
-      [`${BLOCK_CLASS}--reverse`]: props.reverse,
+      [`${BLOCK_CLASS}--reverse`]: props.outlined
+        ? !props.reverse
+        : props.reverse,
       [`${BLOCK_CLASS}--rounded`]: props.rounded,
+      [`${BLOCK_CLASS}--outlined`]: props.outlined,
+      [`${BLOCK_CLASS}--depressed`]: props.depressed,
+      [`${BLOCK_CLASS}--tile`]: props.tile,
+      [`${BLOCK_CLASS}--icon`]: props.icon,
     },
   ])
 
@@ -82,14 +91,14 @@
 
 <template>
   <Component :is="tag" v-bind="boundings">
-    <span :class="`${BLOCK_CLASS}__hover`"></span>
+    <span :class="`${BLOCK_CLASS}__overlay`"></span>
     <span :class="`${BLOCK_CLASS}__inner`">
       <slot></slot>
     </span>
     <BemTransition :name="BLOCK_CLASS">
       <span v-if="pending" :class="`${BLOCK_CLASS}__loader`">
         <slot name="loader">
-          <InfiniteLoader />
+          <ProgressCircular />
         </slot>
       </span>
     </BemTransition>
@@ -99,15 +108,15 @@
 <style scoped lang="scss">
   .button {
     $block-selector: &;
+
+    --button-color: var(--theme-text-color);
     --button-text-color: var(--theme-background-color);
-    --button-background-color: var(--theme-text-color);
-    --button-border-color: transparent;
 
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: var(--button-background-color);
+    background: var(--button-color);
     color: var(--button-text-color);
     text-align: center;
     text-decoration: none;
@@ -118,21 +127,11 @@
     vertical-align: middle;
     box-shadow: none;
     border-radius: 0.25em;
-    border: 1px solid var(--button-border-color);
-    padding: 0.875em 1em;
+    border: 0;
+    padding: 0.5em 1em;
     overflow: hidden;
-
-    &:not([disabled]):not(#{$block-selector}--disabled) {
-      cursor: pointer;
-    }
-
-    &:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--discret):hover {
-      color: var(--button-background-color);
-    }
-
-    &:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--discret):active {
-      transform: scale(0.9);
-    }
+    transition: all 150ms;
+    cursor: pointer;
 
     // transition
     &--enter-active,
@@ -153,48 +152,46 @@
       transform: translateY(0);
     }
 
-    // themes
-    &--discret {
-      padding: 0;
-      color: inherit;
-      background: none;
+    // options
+    &--tile {
       border-radius: 0;
-      border: 0;
-      line-height: 1.5;
-      font-weight: normal;
-      font-size: inherit;
     }
 
-    &--primary {
-      --button-text-color: var(--theme-primary-text-color);
-      --button-background-color: var(--theme-primary-color);
-    }
+    &--depressed {
+      padding: 0;
+      border-radius: inherit;
+      background: inherit;
+      color: inherit;
 
-    &--reverse {
-      background: var(--button-text-color);
-      color: var(--button-background-color);
-      border-color: var(--button-background-color);
+      &:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--pending):hover {
+        color: var(--button-color);
+        text-decoration: underline;
+      }
 
-      &:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--discret):hover {
-        color: var(--button-text-color);
+      &:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--pending):active {
+        text-shadow: 0 0 0.0625em currentColor;
       }
     }
 
-    // sizes
-    &--small {
-      padding: 0.75em 1.25em;
-      font-size: 0.875em;
+    &--icon {
+      width: 2.5em;
+      height: 2.5em;
     }
 
-    &--large {
-      font-size: 2em;
+    &--outlined {
+      border: 1px solid currentColor;
     }
 
-    // other styles
+    &--reverse {
+      background-color: var(--button-text-color);
+      color: var(--button-color);
+    }
+
     &--block {
       width: 100%;
     }
 
+    [disabled],
     &--disabled {
       opacity: 0.35;
       cursor: not-allowed;
@@ -204,10 +201,42 @@
       border-radius: 99em;
     }
 
+    // themes
+    &--discret {
+      color: inherit;
+      background: none;
+      border: inherit;
+      line-height: inherit;
+      font-weight: normal;
+      font-size: inherit;
+    }
+
+    &--primary {
+      --button-color: var(--theme-primary-color);
+      --button-text-color: var(--theme-primary-text-color);
+    }
+
+    // sizes
+    &--extra-small {
+      font-size: 0.75em;
+    }
+
+    &--small {
+      font-size: 0.875em;
+    }
+
+    &--large {
+      font-size: 1.125em;
+    }
+
+    &--extra-large {
+      font-size: 1.25em;
+    }
+
     &__inner {
       position: relative;
       z-index: 1;
-      transition: all 150ms;
+      transition: color 150ms;
       width: 100%;
 
       #{$block-selector}--pending & {
@@ -216,24 +245,25 @@
       }
     }
 
-    &__hover {
+    &__overlay {
       position: absolute;
-      background-color: var(--button-text-color);
-      height: 100%;
       top: 0;
-      left: -100%;
-      transform: skew(50deg);
-      transition: width 350ms;
-      transform-origin: top left;
-      width: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: currentColor;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 150ms;
 
-      #{$block-selector}--reverse & {
-        background-color: var(--button-background-color);
+      #{$block-selector}:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--pending):not(#{$block-selector}--depressed):hover
+        & {
+        opacity: 0.25;
       }
 
-      #{$block-selector}:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--discret):hover
+      #{$block-selector}:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--pending):not(#{$block-selector}--depressed):active
         & {
-        width: 200%;
+        opacity: 0.5;
       }
     }
 

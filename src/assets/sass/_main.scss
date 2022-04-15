@@ -12,6 +12,8 @@ body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   width: 100%;
   line-height: 1.5;
+  background-color: var(--theme-background-color);
+  color: var(--theme-text-color);
 }
 
 *,

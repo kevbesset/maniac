@@ -9,6 +9,8 @@
       tag?: string
       collapse?: boolean
       space?: string
+      center?: boolean
+      block?: boolean
     }>(),
     {
       tag: 'div',
@@ -22,6 +24,8 @@
     BLOCK_CLASS,
     {
       [`${BLOCK_CLASS}--collapse`]: props.collapse,
+      [`${BLOCK_CLASS}--center`]: props.center,
+      [`${BLOCK_CLASS}--block`]: props.block,
     },
   ])
 
@@ -70,13 +74,23 @@
       margin: 0;
     }
 
+    &--center {
+      align-items: center;
+    }
+
+    &--block {
+      display: flex;
+      width: 100%;
+    }
+
     ::v-deep([data-item]) {
       margin-top: v-bind('spaceEm');
       margin-left: v-bind('spaceEm');
     }
 
     &--collapse::v-deep() [data-item] {
-      margin: 0;
+      margin-left: 0;
+      margin-bottom: 0;
 
       &:not(:first-child) {
         border-top-left-radius: 0;
