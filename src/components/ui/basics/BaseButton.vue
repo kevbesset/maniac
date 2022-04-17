@@ -22,7 +22,7 @@
     rounded?: boolean
     outlined?: boolean
     tile?: boolean
-    depressed?: boolean
+    text?: boolean
     icon?: boolean
   }>()
 
@@ -64,7 +64,7 @@
         : props.reverse,
       [`${BLOCK_CLASS}--rounded`]: props.rounded,
       [`${BLOCK_CLASS}--outlined`]: props.outlined,
-      [`${BLOCK_CLASS}--depressed`]: props.depressed,
+      [`${BLOCK_CLASS}--text`]: props.text,
       [`${BLOCK_CLASS}--tile`]: props.tile,
       [`${BLOCK_CLASS}--icon`]: props.icon,
     },
@@ -157,7 +157,7 @@
       border-radius: 0;
     }
 
-    &--depressed {
+    &--text {
       padding: 0;
       border-radius: inherit;
       background: inherit;
@@ -255,12 +255,12 @@
       pointer-events: none;
       transition: opacity 150ms;
 
-      #{$block-selector}:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--pending):not(#{$block-selector}--depressed):hover
+      #{$block-selector}:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--pending):not(#{$block-selector}--text):hover
         & {
         opacity: 0.25;
       }
 
-      #{$block-selector}:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--pending):not(#{$block-selector}--depressed):active
+      #{$block-selector}:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--pending):not(#{$block-selector}--text):active
         & {
         opacity: 0.5;
       }

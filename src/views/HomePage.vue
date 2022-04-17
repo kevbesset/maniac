@@ -47,7 +47,7 @@
             @click="pending = !pending"
             >pending</BaseButton
           >
-          <BaseButton :theme="theme" depressed>depressed</BaseButton>
+          <BaseButton :theme="theme" text>text</BaseButton>
         </GutterWrapper>
         <br />
         <br />
