@@ -1,32 +1,48 @@
 <script setup lang="ts">
-  import { nextTick, provide, readonly, ref, watch } from 'vue'
+  import { nextTick, onMounted, provide, readonly, ref, watch } from 'vue'
   import { ThemeName, ThemeProvider } from '@/vars/ThemeAttr'
   import BemTransition from '@/components/ui/transitions/BemTransition.vue'
 
   const BLOCK_CLASS = 'theme'
   const STORAGE_KEY = 'theme'
 
-  const getDefaultTheme = (): ThemeName => {
+  const props =
+    defineProps<{
+      theme?: ThemeName
+    }>()
+
+  function getDefaultTheme(): ThemeName {
+    if (props.theme) return props.theme
+
     let defaultTheme =
-      (localStorage.getItem(STORAGE_KEY) as ThemeName) || ThemeName.DEFAULT
+      (localStorage.getItem(STORAGE_KEY) as ThemeName) ||
+      (window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+        ? ThemeName.DARK
+        : ThemeName.DEFAULT
 
     if (!Object.values(ThemeName).includes(defaultTheme)) {
       defaultTheme = ThemeName.DEFAULT
     }
 
-    localStorage.setItem(STORAGE_KEY, defaultTheme)
-
     return defaultTheme
   }
+
   const switcher = ref<HTMLElement | null>(null)
   const currentTheme = ref<ThemeName>(getDefaultTheme())
   const switching = ref(false)
   const switchTheme = ref<ThemeName>(ThemeName.DEFAULT)
 
-  document.body.classList.add(
-    BLOCK_CLASS,
-    `${BLOCK_CLASS}--${currentTheme.value}`
-  )
+  onMounted(() => {
+    // Clean body classes in case there is a theme already set
+    Object.values(ThemeName).forEach((theme) =>
+      document.body.classList.remove(`${BLOCK_CLASS}--${theme}`)
+    )
+    document.body.classList.add(
+      BLOCK_CLASS,
+      `${BLOCK_CLASS}--${currentTheme.value}`
+    )
+  })
 
   const prepare = (nextTheme: ThemeName) => {
     if (switcher.value) {
@@ -46,24 +62,35 @@
     document.body.classList.add(`${BLOCK_CLASS}--${newTheme}`)
   })
 
-  const afterEnterTransition = () => {
+  watch(props, () => {
+    if (props.theme) {
+      prepare(props.theme)
+    }
+  })
+
+  function afterEnterTransition() {
     if (switcher.value) {
       currentTheme.value = switchTheme.value
-      localStorage.setItem(STORAGE_KEY, currentTheme.value)
       switching.value = false
     }
   }
 
-  const afterLeaveTransition = () => {
+  function afterLeaveTransition() {
     if (switcher.value) {
       switcher.value.innerHTML = '' // reset switcher content
     }
   }
 
   provide(ThemeProvider.THEME, readonly(currentTheme))
-  provide(ThemeProvider.SET_THEME, (newTheme: ThemeName) => {
-    prepare(newTheme)
-  })
+  provide(
+    ThemeProvider.SET_THEME,
+    (newTheme: ThemeName, persist: boolean = false) => {
+      prepare(newTheme)
+      if (persist) {
+        localStorage.setItem(STORAGE_KEY, newTheme)
+      }
+    }
+  )
 </script>
 
 <template>
