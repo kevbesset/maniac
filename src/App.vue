@@ -3,7 +3,7 @@
   import { useRoute } from 'vue-router'
   import DefaultLayout from '@/components/layouts/DefaultLayout.vue'
   import EmptyLayout from '@/components/layouts/EmptyLayout.vue'
-  import ThemeLayer from '@/components/ui/layers/ThemeLayer.vue'
+  import ThemeManager from './components/ui/themes/ThemeManager.vue'
 
   const route = useRoute()
 
@@ -15,9 +15,9 @@
 </script>
 
 <template>
-  <ThemeLayer>
+  <ThemeManager>
     <Component :is="layoutComponent" />
-  </ThemeLayer>
+  </ThemeManager>
 </template>
 
 <style lang="scss">

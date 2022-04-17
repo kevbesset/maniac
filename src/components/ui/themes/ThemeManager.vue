@@ -18,21 +18,15 @@
 
     return defaultTheme
   }
-
-  withDefaults(
-    defineProps<{
-      target?: string
-    }>(),
-    {
-      target: 'body',
-    }
-  )
   const switcher = ref<HTMLElement | null>(null)
-  const theme = ref<ThemeName>(getDefaultTheme())
+  const currentTheme = ref<ThemeName>(getDefaultTheme())
   const switching = ref(false)
   const switchTheme = ref<ThemeName>(ThemeName.DEFAULT)
 
-  document.body.classList.add(BLOCK_CLASS, `${BLOCK_CLASS}--${theme.value}`)
+  document.body.classList.add(
+    BLOCK_CLASS,
+    `${BLOCK_CLASS}--${currentTheme.value}`
+  )
 
   const prepare = (nextTheme: ThemeName) => {
     if (switcher.value) {
@@ -47,15 +41,15 @@
     }
   }
 
-  watch(theme, (newTheme, oldTheme) => {
+  watch(currentTheme, (newTheme, oldTheme) => {
     document.body.classList.remove(`${BLOCK_CLASS}--${oldTheme}`)
     document.body.classList.add(`${BLOCK_CLASS}--${newTheme}`)
   })
 
   const afterEnterTransition = () => {
     if (switcher.value) {
-      theme.value = switchTheme.value
-      localStorage.setItem(STORAGE_KEY, theme.value)
+      currentTheme.value = switchTheme.value
+      localStorage.setItem(STORAGE_KEY, currentTheme.value)
       switching.value = false
     }
   }
@@ -66,7 +60,7 @@
     }
   }
 
-  provide(ThemeProvider.THEME, readonly(theme))
+  provide(ThemeProvider.THEME, readonly(currentTheme))
   provide(ThemeProvider.SET_THEME, (newTheme: ThemeName) => {
     prepare(newTheme)
   })
@@ -74,7 +68,7 @@
 
 <template>
   <slot></slot>
-  <Teleport :to="target">
+  <Teleport to="body">
     <BemTransition
       :name="BLOCK_CLASS"
       @after-enter="afterEnterTransition"
