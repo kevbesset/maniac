@@ -1,0 +1,67 @@
+import { Meta } from '@storybook/addon-docs'
+import ThemeManager from '@/components/ui/themes/ThemeManager.vue'
+
+<Meta title="Getting started" />
+
+## Installation
+
+Maniac est un outil en ligne de commande et nécessite d'être installé globalement avec [npm](https://www.npmjs.com/).
+
+```bash
+npm i -g maniac
+```
+
+Vous aurez ensuite accès à toutes les commandes disponibles avec `maniac`.
+
+## Create a new starter project
+
+Créer un projet Vite + Vue + Typescript avec l'ensemble des composants, lancer :
+
+```bash
+maniac create my-awesome-project
+```
+
+## Add specific package to your current project
+
+Il est aussi possible d'ajouter un choix de package à votre projet.
+
+```bash
+maniac add buttons
+```
+
+Vous pouvez aussi chaîner les packages pour en ajouter plusieurs en même temps.
+
+```bash
+maniac add buttons cards modals
+```
+
+⚠️ Par défaut, le package n'écrasera pas les fichiers s'ils existent déjà. Pour cela, rajouter le paramètre `--force` (ou `-f`)
+
+⚠️ Certains packages recquirent des dépendances supplémentaires ou des actions manuelles qui ne seront pas réalisée avec cette commande.
+Veuillez consulter la page des composants pour plus d'informations.
+
+## Node version manager
+
+Maniac est fait pour fonctionner avec [nvm](https://github.com/nvm-sh/nvm) pour la gestion des versions de node.
+En exécutant la commande suivante, vous rajouter automatiquement le fichier `.nvmrc` dans votre projet avec votre version courante de Node.
+
+```bash
+maniac nvm
+```
+
+## Documentation
+
+Il est possible de lancer la documentation en local avec votre version courante en exécutant la commande suivante.
+À noter que c'est la documentation de votre version de Maniac, et non pas de votre projet.
+
+```bash
+maniac doc
+```
+
+## Help
+
+Bien sûr, si vous souhaitez plus d'informations sur la ligne de commande, vous pouvez toujours lancer
+
+```bash
+maniac help
+```

@@ -2,7 +2,7 @@
 import ThemeManager from '../src/components/ui/themes/ThemeManager.vue'
 import { ThemeName } from '../src/vars/ThemeAttr'
 import '../src/assets/sass/_main.scss'
-import '../src/stories/_main.scss'
+import '../src/stories/assets/sass/_main.scss'
 
 export const parameters = {
   layout: 'centered',
@@ -24,7 +24,7 @@ export const parameters = {
   },
   options: {
     storySort: {
-      order: ['*'],
+      order: ['Introduction', 'Getting started', 'Guidelines', '*'],
     },
   },
 }

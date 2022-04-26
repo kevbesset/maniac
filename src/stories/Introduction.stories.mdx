@@ -1,203 +1,45 @@
 import { Meta } from '@storybook/addon-docs'
+import { LinkTo } from '@storybook/addon-links'
 
-<Meta title="Example/Introduction" />
+<Meta title="Introduction" />
 
-<style>{`
-  .subheading {
-    --mediumdark: '#999999';
-    font-weight: 900;
-    font-size: 13px;
-    color: #999;
-    letter-spacing: 6px;
-    line-height: 24px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    margin-top: 40px;
-  }
+## Introduction
 
-  .link-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    row-gap: 10px;
-  }
+Maniac est une bibliothèque de composant [Vue](https://vuejs.org/) dogmatique prête à être utilisée pour des projets [Vite](https://vitejs.dev/).
+Elle est conçue pour être utilisée comme un point de départ pour vos propres projets.
 
-  @media (min-width: 620px) {
-    .link-list {
-      row-gap: 20px;
-      column-gap: 20px;
-      grid-template-columns: 1fr 1fr;
-    }
-  }
+## Our principles
 
-  @media all and (-ms-high-contrast:none) {
-  .link-list {
-      display: -ms-grid;
-      -ms-grid-columns: 1fr 1fr;
-      -ms-grid-rows: 1fr 1fr;
-    }
-  }
+En tant que développeur front-end,
+le problème des bibliothèques comme [Bootstrap](https://getbootstrap.com/) ou [Vuetify](https://vuetifyjs.com/en/) est que l'on délègue une partie du socle de notre application
+à une librairie externe de composant qu'on ne peut pas toujours manipuler et adapter comme on le souhaite,
+rendant parfois difficile la customisation de ces composants, et très compliqué de se séparer de ces librairies une fois fortement installé dans un projet.
+De plus, certaines librairies apportent des fonctionnalités qui vont impacter l'ensemble de votre projet pouvant fragiliser la maintenabilité de votre projet.
 
-  .link-item {
-    display: block;
-    padding: 20px 30px 20px 15px;
-    border: 1px solid #00000010;
-    border-radius: 5px;
-    transition: background 150ms ease-out, border 150ms ease-out, transform 150ms ease-out;
-    color: #333333;
-    display: flex;
-    align-items: flex-start;
-  }
+Contrairement à ces autres bibliothèques, Maniac vient s'installé au coeur de votre projet pour permettre à n'importe qui de customiser entièrement ces composants.
+Elle est composée de plusieurs composants, qui sont tous développés avec amour pour le développement front-end, en suivant les bonnes pratiques avec l'objectif de travailler en équipe et récupérer un socle de composants stables.
 
-  .link-item:hover {
-    border-color: #1EA7FD50;
-    transform: translate3d(0, -3px, 0);
-    box-shadow: rgba(0, 0, 0, 0.08) 0 3px 10px 0;
-  }
+Dans ce but, les composants disponibles répondent à de nombreux critères de qualité, de maintenabilité et facile à manipuler pour des développeurs de tout niveaux.
+Maniac offre une totale transparence sur le développement de ses composants pour garantir une qualité de code stable et une maintenabilité optimale tout au long de votre projet.
+De plus, les [bonnes pratiques](?path=/docs/guidelines-best-practices--page) présentées peuvent être applicable à tous les projets.
 
-  .link-item:active {
-    border-color: #1EA7FD;
-    transform: translate3d(0, 0, 0);
-  }
+## Contribute
 
-  .link-item strong {
-    font-weight: 700;
-    display: block;
-    margin-bottom: 2px;
-  }
-  
-  .link-item img {
-    height: 40px;
-    width: 40px;
-    margin-right: 15px;
-    flex: none;
-  }
+Si vous souhaitez contribuer à ce projet, il est recommandé de prendre en compte ces quelques règles afin de respecter le code et la qualité du projet :
 
-  .link-item span {
-    font-size: 14px;
-    line-height: 20px;
-  }
+- Avant de commencer à développer une fonctionnalité, il est fortement conseillé d'en discuter via une issue [Github](https://github.com/kevbesset/maniac) afin d'éviter des doublons ou d'apporter des fonctionnalités contradictoire à la phylosophie de Maniac.
+- Ensuite, s'il s'agit d'une suggestion dans le code, il est recommandé de lire les [bonnes pratiques](?path=/docs/guidelines-best-practices--page) pour éviter les erreurs de développement et de qualité.
+  Pour rappel, lorsque vous modifiez ou créez un nouveau composant, il faut s'assurer que la ligne de commande, la story dans le design system ainsi que le composant lui-même fonctionne correctement.
+- Puis vous pouvez ensuite créer une pull request qui sera reviewée et ajoutée au projet après validation.
 
-  .tip {
-    display: inline-block;
-    border-radius: 1em;
-    font-size: 11px;
-    line-height: 12px;
-    font-weight: 700;
-    background: #E7FDD8;
-    color: #66BF3C;
-    padding: 4px 12px;
-    margin-right: 10px;
-    vertical-align: top;
-  }
+## Upgrade guide
 
-  .tip-wrapper {
-    font-size: 13px;
-    line-height: 20px;
-    margin-top: 40px;
-    margin-bottom: 40px;
-  }
+Puisque les composants sont ajoutés directement dans votre projet, il devient ensuite difficile de faire des mises à jour si vous venez à les modifier fortement.
+Dans le cas où vous souhaitez quand même mettre à jour les composants, il est recommandé d'utiliser Git pour déterminer les changements et gérer les différences.
 
-  .tip-wrapper code {
-    font-size: 12px;
-    display: inline-block;
-  }
+Si vous n'avez pas modifier les composants, vous pouvez sereinement écraser avec les composants à jour.
 
-  
-`}</style>
+## Feedback
 
-# Welcome to Storybook
-
-Storybook helps you build UI components in isolation from your app's business logic, data, and context.
-That makes it easy to develop hard-to-reach states. Save these UI states as **stories** to revisit during development, testing, or QA.
-
-Browse example stories now by navigating to them in the sidebar.
-View their code in the `src/stories` directory to learn how they work.
-We recommend building UIs with a [**component-driven**](https://componentdriven.org) process starting with atomic components and ending with pages.
-
-<div className="subheading">Configure</div>
-
-<div className="link-list">
-  <a
-    className="link-item"
-    href="https://storybook.js.org/docs/react/addons/addon-types"
-    target="_blank"
-  >
-    <span>
-      <strong>Presets for popular tools</strong>
-      Easy setup for TypeScript, SCSS and more.
-    </span>
-  </a>
-  <a
-    className="link-item"
-    href="https://storybook.js.org/docs/react/configure/webpack"
-    target="_blank"
-  >
-    <span>
-      <strong>Build configuration</strong>
-      How to customize webpack and Babel
-    </span>
-  </a>
-  <a
-    className="link-item"
-    href="https://storybook.js.org/docs/react/configure/styling-and-css"
-    target="_blank"
-  >
-    <span>
-      <strong>Styling</strong>
-      How to load and configure CSS libraries
-    </span>
-  </a>
-  <a
-    className="link-item"
-    href="https://storybook.js.org/docs/react/get-started/setup#configure-storybook-for-your-stack"
-    target="_blank"
-  >
-    <span>
-      <strong>Data</strong>
-      Providers and mocking for data libraries
-    </span>
-  </a>
-</div>
-
-<div className="subheading">Learn</div>
-
-<div className="link-list">
-  <a className="link-item" href="https://storybook.js.org/docs" target="_blank">
-    <span>
-      <strong>Storybook documentation</strong>
-      Configure, customize, and extend
-    </span>
-  </a>
-  <a
-    className="link-item"
-    href="https://storybook.js.org/tutorials/"
-    target="_blank"
-  >
-    <span>
-      <strong>In-depth guides</strong>
-      Best practices from leading teams
-    </span>
-  </a>
-  <a
-    className="link-item"
-    href="https://github.com/storybookjs/storybook"
-    target="_blank"
-  >
-    <span>
-      <strong>GitHub project</strong>
-      View the source and add issues
-    </span>
-  </a>
-  <a className="link-item" href="https://discord.gg/storybook" target="_blank">
-    <span>
-      <strong>Discord chat</strong>
-      Chat with maintainers and the community
-    </span>
-  </a>
-</div>
-
-<div className="tip-wrapper">
-  <span className="tip">Tip</span>Edit the Markdown in{' '}
-  <code>src/stories/Introduction.stories.mdx</code>
-</div>
+Maniac est en constante évolution, avec l'apparition de nouveaux composants et de nouvelles règles de qualité.
+Aidez-nous à améliorer cette bibliothèque en envoyant vos commentaires et suggestions.
