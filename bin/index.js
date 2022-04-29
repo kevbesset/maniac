@@ -4,6 +4,7 @@ const { program } = require('commander')
 const { createNvmFile } = require('../lib/createNvmFile')
 const { createProject } = require('../lib/createProject')
 const { installPackage } = require('../lib/addPackage')
+const { runStorybook } = require('../lib/runDoc')
 
 program
   .name('maniac')
@@ -36,6 +37,7 @@ program
   .description('show design system')
   .action(() => {
     console.log('Start storybook')
+    runStorybook()
   })
 
 program
