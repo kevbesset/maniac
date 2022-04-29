@@ -3,6 +3,8 @@ import ThemeManager from '../src/components/ui/themes/ThemeManager.vue'
 import { ThemeName } from '../src/vars/ThemeAttr'
 import '../src/assets/sass/_main.scss'
 import '../src/stories/assets/sass/_main.scss'
+import { templateSourceCode } from './source'
+import dedent from 'ts-dedent'
 
 export const parameters = {
   layout: 'centered',
@@ -21,6 +23,15 @@ export const parameters = {
       index: -1,
     },
     canvas: { title: 'Sandbox' },
+  },
+  docs: {
+    transformSource(src, ctx) {
+      const match = /\b("')?template\1:\s*`([^`]+)`/.exec(src)
+      if (match) {
+        return templateSourceCode(dedent(match[2]), ctx.args, ctx.argTypes)
+      }
+      return src
+    },
   },
   options: {
     storySort: {

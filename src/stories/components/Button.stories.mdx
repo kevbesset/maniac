@@ -1,0 +1,33 @@
+import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs'
+import BaseButton from '@/components/ui/basics/BaseButton.vue'
+
+<Meta title="Components/Button" components={BaseButton} />
+
+## Overview
+
+Ce composant permet de créer des éléments cliquables au sein de votre application.
+Par exemple, avec ce bouton vous pouvez soumettre des formulaires, ouvrir des popins, exécuter une action, ou renvoyer vers une autre page.
+
+<Canvas>
+  <Story name="Button">
+    {() => {
+      return {
+        components: { BaseButton },
+        template: `<BaseButton>Button</BaseButton>`,
+      }
+    }}
+  </Story>
+</Canvas>
+
+## API
+
+<ArgsTable of={BaseButton} />
+
+## Usage
+
+Le composant peut être utiliser dès le moment où l'on souhaite construire une intéraction cliquable avec l'utilisateur.
+
+Dans le cas où c'est un lien, il n'est pas nécessaire d'utiliser un bouton sauf si l'on souhaite conserver le rendu style "bouton".
+Le composant s'adapte correctement pour changer le tag HTML "a" ou "button" en fonction de son utilisation pour une meilleure logique sémantique.
+
+## Variants
