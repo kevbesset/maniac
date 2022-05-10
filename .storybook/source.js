@@ -8,7 +8,7 @@ export const templateSourceCode = (
 ) => {
   const componentArgs = {}
   for (const [k, t] of Object.entries(argTypes)) {
-    const val = args[k]
+    const val = args?.[k]
     if (
       typeof val !== 'undefined' &&
       t.table &&

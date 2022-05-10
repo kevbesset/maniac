@@ -1,7 +1,46 @@
 import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs'
 import BaseButton from '@/components/ui/basics/BaseButton.vue'
+import { ButtonTheme, ButtonSize, ButtonType } from '@/vars/ButtonAttr.ts'
+import { StoryControlType, StoryName } from '@/vars/StoryAttr.ts'
 
-<Meta title="Components/Button" components={BaseButton} />
+<Meta
+  title="Components/Button"
+  component={BaseButton}
+  argTypes={{
+    type: {
+      control: StoryControlType.SELECT,
+      options: [ButtonType.BUTTON, ButtonType.SUBMIT],
+      table: {
+        type: {
+          summary: `"button" | "submit"`,
+        },
+      },
+    },
+    theme: {
+      control: StoryControlType.SELECT,
+      options: Object.values(ButtonTheme),
+    },
+    size: {
+      control: StoryControlType.SELECT,
+      options: Object.values(ButtonSize),
+    },
+    to: {
+      control: false,
+    },
+  }}
+  args={{
+    disabled: false,
+    pending: false,
+    block: false,
+    reverse: false,
+    rounded: false,
+    outlined: false,
+    tile: false,
+    text: false,
+    icon: false,
+    default: 'Button',
+  }}
+/>
 
 ## Overview
 
@@ -10,10 +49,13 @@ Par exemple, avec ce bouton vous pouvez soumettre des formulaires, ouvrir des po
 
 <Canvas>
   <Story name="Button">
-    {() => {
+    {(args) => {
       return {
         components: { BaseButton },
-        template: `<BaseButton>Button</BaseButton>`,
+        setup() {
+          return { args }
+        },
+        template: `<BaseButton v-bind="args">{{ args.default }}</BaseButton>`,
       }
     }}
   </Story>
@@ -21,13 +63,72 @@ Par exemple, avec ce bouton vous pouvez soumettre des formulaires, ouvrir des po
 
 ## API
 
-<ArgsTable of={BaseButton} />
+<ArgsTable story="Button" />
 
 ## Usage
 
 Le composant peut être utiliser dès le moment où l'on souhaite construire une intéraction cliquable avec l'utilisateur.
 
 Dans le cas où c'est un lien, il n'est pas nécessaire d'utiliser un bouton sauf si l'on souhaite conserver le rendu style "bouton".
-Le composant s'adapte correctement pour changer le tag HTML "a" ou "button" en fonction de son utilisation pour une meilleure logique sémantique.
+Cependant, si vous souhaitez créer un lien avec un rendu de style "bouton",
+vous pouvez spécifier la propriété `href` pour un lien classique ou `to` qui utilisera le `RouterLink` de [VueRouter](https://router.vuejs.org/).
+La sémantique du composant s'adapte correctement pour changer le tag HTML "a" ou "button" en fonction de son utilisation pour une meilleure logique sémantique.
+
+Attention, le composant est de base de type `button`, contrairement à l'élement HTML qui, de base, est à `submit`.
+Le choix est que par défaut un bouton est une interaction classique et que lorsque l'on choisit que cette interaction est une soumission de formulaire,
+il est obligatoire de rajouter `type="ButtonType.SUBMIT"` au composant.
 
 ## Variants
+
+### Themes
+
+La propriété `theme` donne accès à différents styles de bouton. Il permet aussi de créer une hiérarchie des actions sur l'application.
+
+<Canvas>
+  <Story name="Theme">
+    {() => {
+      return {
+        components: { BaseButton },
+        template: Object.values(ButtonTheme)
+          .map(
+            (theme) =>
+              `<BaseButton theme="${theme}">
+                ${theme ? theme : 'default'}
+              </BaseButton>`
+          )
+          .join(' '),
+      }
+    }}
+  </Story>
+</Canvas>
+
+### Sizes
+
+La propriété `size` donne accès à différents tailles de bouton pour convenir à différents scénarios.
+
+<Canvas>
+  <Story name="Size">
+    {() => {
+      return {
+        components: { BaseButton },
+        template: Object.values(ButtonSize)
+          .map(
+            (size) =>
+              `<BaseButton size="${size}">
+                ${size}
+              </BaseButton>`
+          )
+          .join(' '),
+      }
+    }}
+  </Story>
+</Canvas>
+
+## 📦 Package
+
+```bash
+maniac add buttons
+```
+
+À noter que le composant est déjà prêt à l'emploi pour fonctionner avec [VueRouter](https://router.vuejs.org/).
+Si ce n'est pas souhaité, il vous suffit la notion de la propriété `to` dans le composant.

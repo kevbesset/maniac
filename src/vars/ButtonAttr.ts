@@ -5,11 +5,14 @@ export enum ButtonType {
   ROUTER_LINK = 'RouterLink',
 }
 
+// Follow some kind of hierarchy of actions
 export enum ButtonTheme {
-  DISCRET = 'discret',
   PRIMARY = 'primary',
+  DEFAULT = 'default',
+  DISCRET = 'discret',
 }
 
+// From smaller to bigger
 export enum ButtonSize {
   EXTRA_SMALL = 'extra-small',
   SMALL = 'small',

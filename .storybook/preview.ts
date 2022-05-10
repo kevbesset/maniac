@@ -5,9 +5,17 @@ import '../src/assets/sass/_main.scss'
 import '../src/stories/assets/sass/_main.scss'
 import { templateSourceCode } from './source'
 import dedent from 'ts-dedent'
+import { app } from '@storybook/vue3'
+import { createRouter, createWebHistory } from 'vue-router'
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [],
+})
+
+app.use(router)
 
 export const parameters = {
-  layout: 'centered',
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     expanded: true,
