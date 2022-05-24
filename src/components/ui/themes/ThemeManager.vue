@@ -114,6 +114,8 @@
 </template>
 
 <style lang="scss">
+  @import '@/assets/sass/theme';
+
   .theme {
     &--enter-active {
       transition: clip-path 500ms;
@@ -141,27 +143,7 @@
 
     &,
     &__switcher {
-      background-color: var(--theme-background-color);
-      color: var(--theme-text-color);
-
-      // Default theme
-      // background colors
-      --theme-background-color: white;
-
-      // text colors
-      --theme-text-color: #213547;
-
-      // themed colors
-      --theme-primary-color: #42b883;
-      --theme-primary-text-color: white;
-
-      &--dark {
-        // background colors
-        --theme-background-color: #213547;
-
-        // text colors
-        --theme-text-color: white;
-      }
+      @include theme;
     }
 
     &__switcher {

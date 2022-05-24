@@ -9,22 +9,23 @@
 
   const router = useRouter()
   const attrs = useAttrs()
-  const props = defineProps<{
-    type?: ButtonType.BUTTON | ButtonType.SUBMIT
-    theme?: ButtonTheme
-    size?: ButtonSize
-    to?: RouteLocationRaw
-    href?: string
-    disabled?: boolean
-    pending?: boolean
-    block?: boolean
-    reverse?: boolean
-    rounded?: boolean
-    outlined?: boolean
-    tile?: boolean
-    text?: boolean
-    icon?: boolean
-  }>()
+  const props =
+    defineProps<{
+      type?: ButtonType.BUTTON | ButtonType.SUBMIT
+      theme?: ButtonTheme
+      size?: ButtonSize
+      to?: RouteLocationRaw
+      href?: string
+      disabled?: boolean
+      pending?: boolean
+      block?: boolean
+      reverse?: boolean
+      rounded?: boolean
+      outlined?: boolean
+      tile?: boolean
+      text?: boolean
+      icon?: boolean
+    }>()
 
   const tag = computed(() =>
     props.disabled
