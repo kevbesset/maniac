@@ -33,7 +33,7 @@ program
   })
 
 program
-  .command('doc')
+  .command('docs')
   .description('show design system')
   .action(() => {
     console.log('Start storybook')
