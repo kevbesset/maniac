@@ -62,11 +62,14 @@
     document.body.classList.add(`${BLOCK_CLASS}--${newTheme}`)
   })
 
-  watch(props, () => {
-    if (props.theme) {
-      prepare(props.theme)
+  watch(
+    () => props.theme,
+    () => {
+      if (props.theme) {
+        prepare(props.theme)
+      }
     }
-  })
+  )
 
   function afterEnterTransition() {
     if (switcher.value) {

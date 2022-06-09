@@ -30,6 +30,11 @@ et vous pouver le manipuler en modifiant la valeur dans la toolbar en haut de vo
 ## Comment créer un nouveau thème
 
 Pour créer un nouveau thème, il faut d'abord l'ajouter dans la liste des thèmes disponibles dans `ThemeName` qui se trouve dans `vars/ThemeAttr.ts`.
+Ensuite, il faut bien sûr gérer les nouvelles couleurs dans votre `assets/sass/_theme.scss` en ajoutant votre modifier BEM `&--new-theme` et surcharger uniquement les couleurs que vous souhaitez changer.
+
+Vous ne devez pas créer de nouvelles variables dans un thème car celle-ci doit forcément avoir un équivalent dans le thème par défaut.
+
+Enfin, vous pouvez bien sûr ajouter autant de variables CSS que vous le souhaitez dans le thème par défaut, et ensuite les surcharger dans le thème que vous souhaitez.
 
 ## Gestion des couleurs
 
