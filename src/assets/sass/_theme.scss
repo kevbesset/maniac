@@ -11,9 +11,10 @@
     --theme-text-color: #213547;
 
     // themed colors
-    --theme-button-color: #f9f9f9;
     --theme-primary-color: #646cff;
     --theme-primary-text-color: white;
+    --theme-secondary-color: #f9f9f9;
+    --theme-secondary-text-color: var(--theme-text-color);
 
     // misc
     --theme-transition-duration: 150ms;
@@ -27,7 +28,7 @@
       --theme-text-color: white;
 
       // themed colors
-      --theme-button-color: #2c4760;
+      --theme-secondary-color: #2c4760;
     }
   }
 }

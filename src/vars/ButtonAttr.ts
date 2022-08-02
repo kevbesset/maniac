@@ -8,8 +8,8 @@ export enum ButtonType {
 // Follow some kind of hierarchy of actions
 export enum ButtonTheme {
   DEFAULT = 'default',
-  SIMPLE = 'simple',
   PRIMARY = 'primary',
+  SECONDARY = 'secondary',
   DISCRET = 'discret',
 }
 

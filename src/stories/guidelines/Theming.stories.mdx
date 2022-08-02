@@ -1,6 +1,7 @@
 import { ArgsTable, Canvas, Meta, Story } from '@storybook/addon-docs'
 import ThemeManager from '@/components/ui/themes/ThemeManager.vue'
 import ThemeColor from '@/components/ui/themes/ThemeColor.vue'
+import ThemeVariable from '@/components/ui/themes/ThemeVariable.vue'
 import { ThemeName, ThemeProvider } from '@/vars/ThemeAttr'
 import { StoryControlType, StoryName } from '@/vars/StoryAttr.ts'
 
@@ -77,6 +78,24 @@ Elles sont réparties en plusieurs catégories :
         template: `
             <ThemeColor color="primary-color" description="Couleur primaire de l'application" />
             <ThemeColor color="primary-text-color" description="Couleur du texte primaire de l'application" />
+            <br/>
+            <ThemeColor color="secondary-color" description="Couleur secondaire de l'application" />
+            <ThemeColor color="secondary-text-color" description="Couleur du texte secondaire de l'application" />
+        `,
+      }
+    }}
+  </Story>
+</Canvas>
+
+### D'autres variables
+
+<Canvas>
+  <Story name="Other variables">
+    {() => {
+      return {
+        components: { ThemeVariable },
+        template: `
+            <ThemeVariable variable="transition-duration" description="Durée des transitions par défaut" />
         `,
       }
     }}

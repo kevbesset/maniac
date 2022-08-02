@@ -110,8 +110,8 @@
   .button {
     $block-selector: &;
 
-    --button-color: var(--theme-button-color);
-    --button-text-color: var(--theme-text-color);
+    --button-color: var(--theme-text-color);
+    --button-text-color: var(--theme-background-color);
 
     position: relative;
     display: inline-flex;
@@ -165,7 +165,6 @@
       color: inherit;
 
       &:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--pending):hover {
-        color: var(--button-color);
         text-decoration: underline;
       }
 
@@ -212,14 +211,14 @@
       font-size: inherit;
     }
 
-    &--simple {
-      --button-color: var(--theme-text-color);
-      --button-text-color: var(--theme-background-color);
-    }
-
     &--primary {
       --button-color: var(--theme-primary-color);
       --button-text-color: var(--theme-primary-text-color);
+    }
+
+    &--secondary {
+      --button-color: var(--theme-secondary-color);
+      --button-text-color: var(--theme-secondary-text-color);
     }
 
     // sizes

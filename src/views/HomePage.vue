@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import BaseButton from '@/components/ui/basics/BaseButton.vue'
-  import GutterWrapper from '@/components/ui/wrappers/GutterWrapper.vue'
+  import GutterGroup from '@/components/ui/groups/GutterGroup.vue'
   import { ButtonSize, ButtonTheme } from '@/vars/ButtonAttr'
   import { ThemeName, ThemeProvider } from '@/vars/ThemeAttr'
   import { inject, Ref, ref } from 'vue'
@@ -27,7 +27,7 @@
     <div v-for="theme in Object.values(ButtonTheme)" :key="theme">
       <h2>{{ theme || 'default theme' }}</h2>
       <div :style="{ maxWidth: '1024px', margin: '0 auto' }">
-        <GutterWrapper center>
+        <GutterGroup center>
           <BaseButton :theme="theme">button</BaseButton>
           <BaseButton :theme="theme" reverse>reverse</BaseButton>
           <BaseButton :theme="theme" disabled>disabled</BaseButton>
@@ -45,13 +45,13 @@
             >pending</BaseButton
           >
           <BaseButton :theme="theme" text>text</BaseButton>
-        </GutterWrapper>
+        </GutterGroup>
         <br />
         <br />
         <BaseButton :theme="theme" block>block</BaseButton>
         <br />
         <br />
-        <GutterWrapper center>
+        <GutterGroup center>
           <BaseButton
             v-for="size in [...Object.values(ButtonSize)]"
             :theme="theme"
@@ -59,7 +59,7 @@
           >
             {{ size || 'default size' }}
           </BaseButton>
-        </GutterWrapper>
+        </GutterGroup>
       </div>
     </div>
   </div>
