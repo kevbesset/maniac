@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import { nextTick, onMounted, provide, readonly, ref, watch } from 'vue'
-  import { ThemeName, ThemeProvider } from '@/vars/ThemeAttr'
   import BemTransition from '@/components/ui/transitions/BemTransition.vue'
+  import { ThemeName, ThemeProvider } from '@/vars/ThemeAttr'
+  import { nextTick, onMounted, provide, readonly, ref, watch } from 'vue'
 
   const BLOCK_CLASS = 'theme'
   const STORAGE_KEY = 'theme'
@@ -133,7 +133,8 @@
     }
 
     &--leave-active {
-      transition: all 150ms 150ms;
+      transition: all var(--theme-transition-duration)
+        calc(2 * var(--theme-transition-duration));
     }
 
     &--leave-from {

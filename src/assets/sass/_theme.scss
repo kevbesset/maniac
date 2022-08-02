@@ -11,8 +11,12 @@
     --theme-text-color: #213547;
 
     // themed colors
-    --theme-primary-color: #42b883;
+    --theme-button-color: #f9f9f9;
+    --theme-primary-color: #646cff;
     --theme-primary-text-color: white;
+
+    // misc
+    --theme-transition-duration: 150ms;
 
     // Custom themes
     &--dark {
@@ -21,6 +25,9 @@
 
       // text colors
       --theme-text-color: white;
+
+      // themed colors
+      --theme-button-color: #2c4760;
     }
   }
 }

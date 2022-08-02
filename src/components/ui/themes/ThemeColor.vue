@@ -47,7 +47,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background-color 150ms;
+      transition: background-color var(--theme-transition-duration);
     }
 
     &__details {

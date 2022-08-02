@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import BaseButton from '@/components/ui/basics/BaseButton.vue'
   import GutterWrapper from '@/components/ui/wrappers/GutterWrapper.vue'
-  import { ButtonTheme, ButtonSize } from '@/vars/ButtonAttr'
+  import { ButtonSize, ButtonTheme } from '@/vars/ButtonAttr'
   import { ThemeName, ThemeProvider } from '@/vars/ThemeAttr'
   import { inject, Ref, ref } from 'vue'
 
@@ -24,10 +24,7 @@
     <BaseButton @click="toggleTheme" rounded tile class="toggler">
       🌙
     </BaseButton>
-    <div
-      v-for="theme in [undefined, ...Object.values(ButtonTheme)]"
-      :key="theme"
-    >
+    <div v-for="theme in Object.values(ButtonTheme)" :key="theme">
       <h2>{{ theme || 'default theme' }}</h2>
       <div :style="{ maxWidth: '1024px', margin: '0 auto' }">
         <GutterWrapper center>

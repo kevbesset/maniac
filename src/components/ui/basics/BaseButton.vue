@@ -110,8 +110,8 @@
   .button {
     $block-selector: &;
 
-    --button-color: var(--theme-text-color);
-    --button-text-color: var(--theme-background-color);
+    --button-color: var(--theme-button-color);
+    --button-text-color: var(--theme-text-color);
 
     position: relative;
     display: inline-flex;
@@ -127,18 +127,18 @@
     font-weight: 500;
     vertical-align: middle;
     box-shadow: none;
-    border-radius: 0.25em;
+    border-radius: 0.5em;
     border: 0;
-    padding: 0.5em 1em;
+    padding: 0.6em 1.2em;
     overflow: hidden;
-    transition: all 150ms;
+    transition: all var(--theme-transition-duration);
     cursor: pointer;
 
     // transition
     &--enter-active,
     &--leave-active {
       transition-property: opacity, transform;
-      transition-duration: 150ms;
+      transition-duration: var(--theme-transition-duration);
     }
 
     &--enter-from,
@@ -212,6 +212,11 @@
       font-size: inherit;
     }
 
+    &--simple {
+      --button-color: var(--theme-text-color);
+      --button-text-color: var(--theme-background-color);
+    }
+
     &--primary {
       --button-color: var(--theme-primary-color);
       --button-text-color: var(--theme-primary-text-color);
@@ -237,7 +242,7 @@
     &__inner {
       position: relative;
       z-index: 1;
-      transition: color 150ms;
+      transition: color var(--theme-transition-duration);
       width: 100%;
 
       #{$block-selector}--pending & {
@@ -254,11 +259,11 @@
       background-color: currentColor;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 150ms;
+      transition: opacity var(--theme-transition-duration);
 
       #{$block-selector}:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--pending):not(#{$block-selector}--text):hover
         & {
-        opacity: 0.25;
+        opacity: 0.2;
       }
 
       #{$block-selector}:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--pending):not(#{$block-selector}--text):active
