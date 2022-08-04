@@ -32,6 +32,7 @@
   const currentTheme = ref<ThemeName>(getDefaultTheme())
   const switching = ref(false)
   const switchTheme = ref<ThemeName>(ThemeName.DEFAULT)
+  const nextTheme = ref<ThemeName>(currentTheme.value)
 
   onMounted(() => {
     // Clean body classes in case there is a theme already set
@@ -44,11 +45,12 @@
     )
   })
 
-  const prepare = (nextTheme: ThemeName) => {
+  const prepare = (nextThemeValue: ThemeName) => {
     if (switcher.value) {
       switcher.value.innerHTML = '' // reset switcher content
       switcher.value.innerHTML = document.body.outerHTML // get body HTML inside switcher
-      switchTheme.value = nextTheme
+      switchTheme.value = currentTheme.value
+      nextTheme.value = nextThemeValue
       switching.value = true
 
       nextTick(() => {
@@ -73,7 +75,7 @@
 
   function afterEnterTransition() {
     if (switcher.value) {
-      currentTheme.value = switchTheme.value
+      currentTheme.value = nextTheme.value
       switching.value = false
     }
   }
@@ -120,29 +122,24 @@
   @import '@/assets/sass/theme';
 
   .theme {
-    &--enter-active {
-      transition: clip-path 500ms;
-    }
-
     &--enter-from {
-      clip-path: polygon(-40% 100%, -20% 0, -20% 0, -40% 100%);
+      opacity: 0;
     }
 
     &--enter-to {
-      clip-path: polygon(-40% 100%, -20% 0, 120% 0, 100% 100%);
-    }
-
-    &--leave-active {
-      transition: all var(--theme-transition-duration)
-        calc(2 * var(--theme-transition-duration));
-    }
-
-    &--leave-from {
       opacity: 1;
     }
 
+    &--leave-active {
+      transition: clip-path var(--theme-transition-duration);
+    }
+
+    &--leave-from {
+      clip-path: polygon(-40% 100%, -20% 0, 120% 0, 100% 100%);
+    }
+
     &--leave-to {
-      opacity: 0;
+      clip-path: polygon(100% 100%, 120% 0, 120% 0, 100% 100%);
     }
 
     &,
