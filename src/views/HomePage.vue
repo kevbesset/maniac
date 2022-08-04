@@ -44,7 +44,6 @@
           </BaseButton>
         </GutterGroup>
       </template>
-      <template #footer>This is a footer example</template>
     </PopinDialog>
   </div>
 </template>
