@@ -8,7 +8,7 @@
     width: 100%;
     min-height: 1em;
     overflow: hidden;
-    border-radius: 0.2em;
+    border-radius: var(--theme-border-radius);
 
     &::before,
     &::after {

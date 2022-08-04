@@ -127,7 +127,7 @@
     font-weight: 500;
     vertical-align: middle;
     box-shadow: none;
-    border-radius: 0.5em;
+    border-radius: var(--theme-border-radius);
     border: 0;
     padding: 0.6em 1.2em;
     overflow: hidden;
@@ -176,6 +176,7 @@
     &--icon {
       width: 2.5em;
       height: 2.5em;
+      padding: 0;
     }
 
     &--outlined {

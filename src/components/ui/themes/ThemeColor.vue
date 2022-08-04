@@ -43,7 +43,7 @@
       height: 2.5em;
       border: 1px solid var(--theme-text-color);
       margin-right: 2em;
-      border-radius: 0.2em;
+      border-radius: var(--theme-border-radius);
       display: flex;
       align-items: center;
       justify-content: center;
