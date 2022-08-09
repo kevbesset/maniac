@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import BaseButton from '@/components/ui/basics/BaseButton.vue'
-  import PopinDialog from '@/components/ui/dialogs/PopinDialog.vue'
+  import ModalDialog from '@/components/ui/dialogs/ModalDialog.vue'
   import GutterGroup from '@/components/ui/groups/GutterGroup.vue'
   import { ButtonTheme } from '@/vars/ButtonAttr'
   import { ThemeName, ThemeProvider } from '@/vars/ThemeAttr'
@@ -29,7 +29,7 @@
     <BaseButton :theme="ButtonTheme.SECONDARY" @click="modal = true">
       Click to open
     </BaseButton>
-    <PopinDialog v-model="modal">
+    <ModalDialog v-model="modal">
       <template #header>
         <strong>Buttons</strong>
       </template>
@@ -44,7 +44,7 @@
           </BaseButton>
         </GutterGroup>
       </template>
-    </PopinDialog>
+    </ModalDialog>
   </div>
 </template>
 
