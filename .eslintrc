@@ -201,7 +201,7 @@
         "ignores": ["/^\\$/"]
       }
     ],
-    "vue/no-unregistered-components": [
+    "vue/no-undef-components": [
       "error",
       {
         "ignorePatterns": ["RouterView", "RouterLink"]

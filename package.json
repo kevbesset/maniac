@@ -12,27 +12,25 @@
     "maniac": "./bin/index.js"
   },
   "dependencies": {
-    "commander": "^9.1.0",
-    "fs-extra": "^10.0.1",
-    "sass": "^1.50.0",
     "vue": "^3.2.25",
     "vue-router": "^4.0.14"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.9",
-    "@storybook/addon-actions": "^6.4.22",
-    "@storybook/addon-controls": "^6.4.22",
-    "@storybook/addon-docs": "^6.4.22",
-    "@storybook/addon-links": "^6.4.22",
-    "@storybook/addon-toolbars": "^6.4.22",
-    "@storybook/builder-vite": "^0.1.29",
-    "@storybook/vue3": "^6.4.22",
     "@types/node": "^17.0.23",
     "@vitejs/plugin-vue": "^2.3.0",
-    "babel-loader": "^8.2.4",
-    "typescript": "^4.5.4",
-    "vite": "^2.9.0",
-    "vue-loader": "^16.8.3",
-    "vue-tsc": "^0.29.8"
+    "@vue/eslint-config-prettier": "^7.1.0",
+    "@vue/eslint-config-typescript": "^11.0.3",
+    "commander": "^9.1.0",
+    "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "eslint-plugin-vue": "^9.12.0",
+    "fs-extra": "^10.0.1",
+    "prettier": "^2.8.8",
+    "sass": "^1.50.0",
+    "typescript": "^4.9.5",
+    "vite": "^4.2.0",
+    "vite-plugin-eslint": "^1.8.1",
+    "vue-tsc": "^1.2.0"
   }
 }

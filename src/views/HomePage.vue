@@ -6,7 +6,6 @@
   import { ThemeName, ThemeProvider } from '@/vars/ThemeAttr'
   import { inject, Ref, ref } from 'vue'
 
-  const pending = ref(true)
   const theme = inject<Readonly<Ref<ThemeName>>>(ThemeProvider.THEME)
   const setTheme = inject<(theme: ThemeName) => void>(ThemeProvider.SET_THEME)
   const modal = ref(false)
@@ -23,7 +22,7 @@
 <template>
   <div class="home">
     <h1>Welcome, maniac</h1>
-    <BaseButton @click="toggleTheme" icon rounded class="toggler">
+    <BaseButton icon rounded class="toggler" @click="toggleTheme">
       🌙
     </BaseButton>
     <BaseButton :theme="ButtonTheme.SECONDARY" @click="modal = true">

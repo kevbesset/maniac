@@ -6,10 +6,9 @@
   const BLOCK_CLASS = 'theme'
   const STORAGE_KEY = 'theme'
 
-  const props =
-    defineProps<{
-      theme?: ThemeName
-    }>()
+  const props = defineProps<{
+    theme?: ThemeName
+  }>()
 
   function getDefaultTheme(): ThemeName {
     if (props.theme) return props.theme
@@ -87,19 +86,17 @@
   }
 
   provide(ThemeProvider.THEME, readonly(currentTheme))
-  provide(
-    ThemeProvider.SET_THEME,
-    (newTheme: ThemeName, persist: boolean = false) => {
-      prepare(newTheme)
-      if (persist) {
-        localStorage.setItem(STORAGE_KEY, newTheme)
-      }
+  provide(ThemeProvider.SET_THEME, (newTheme: ThemeName, persist = false) => {
+    prepare(newTheme)
+    if (persist) {
+      localStorage.setItem(STORAGE_KEY, newTheme)
     }
-  )
+  })
 </script>
 
 <template>
   <slot></slot>
+
   <Teleport to="body">
     <BemTransition
       :name="BLOCK_CLASS"
