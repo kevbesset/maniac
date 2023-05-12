@@ -109,6 +109,7 @@
   .button {
     $block-selector: &;
 
+    --button-border-radius: var(--theme-border-radius);
     --button-color: var(--theme-text-color);
     --button-text-color: var(--theme-background-color);
 
@@ -126,7 +127,7 @@
     font-weight: 500;
     vertical-align: middle;
     box-shadow: none;
-    border-radius: var(--theme-border-radius);
+    border-radius: var(--button-border-radius);
     border: 0;
     padding: 0.6em 1.2em;
     transition: all var(--theme-transition-duration);
@@ -153,12 +154,12 @@
 
     // options
     &--tile {
-      border-radius: 0;
+      --button-border-radius: 0;
     }
 
     &--text {
       padding: 0;
-      border-radius: inherit;
+      --button-border-radius: inherit;
       background: inherit;
       color: inherit;
 
@@ -201,7 +202,7 @@
     }
 
     &--rounded {
-      border-radius: 99em;
+      --button-border-radius: 99em;
     }
 
     // themes
@@ -258,7 +259,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      border-radius: var(--theme-border-radius);
+      border-radius: var(--button-border-radius);
       background-color: currentColor;
       opacity: 0;
       pointer-events: none;
