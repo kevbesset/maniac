@@ -8,9 +8,10 @@
     defineProps<{
       tag?: string
       collapse?: boolean
-      space?: string
+      space?: string | number
       center?: boolean
       block?: boolean
+      wrap?: boolean
     }>(),
     {
       tag: 'div',
@@ -24,6 +25,7 @@
     BLOCK_CLASS,
     {
       [`${BLOCK_CLASS}--collapse`]: props.collapse,
+      [`${BLOCK_CLASS}--wrap`]: props.wrap,
       [`${BLOCK_CLASS}--center`]: props.center,
       [`${BLOCK_CLASS}--block`]: props.block,
     },
@@ -64,14 +66,15 @@
 <style scoped lang="scss">
   .gutter {
     $block-selector: &;
-
-    margin-top: calc(v-bind('spaceEm') * -1);
-    margin-left: calc(v-bind('spaceEm') * -1);
+    gap: v-bind('spaceEm');
     display: inline-flex;
-    flex-wrap: wrap;
 
     &--collapse {
-      margin: 0;
+      gap: 0;
+    }
+
+    &--wrap {
+      flex-wrap: wrap;
     }
 
     &--center {
@@ -83,15 +86,7 @@
       width: 100%;
     }
 
-    ::v-deep([data-item]) {
-      margin-top: v-bind('spaceEm');
-      margin-left: v-bind('spaceEm');
-    }
-
-    &--collapse::v-deep() [data-item] {
-      margin-left: 0;
-      margin-bottom: 0;
-
+    &--collapse:deep() [data-item] {
       &:not(:first-child) {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;

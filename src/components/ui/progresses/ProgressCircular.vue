@@ -1,6 +1,6 @@
 <template>
   <span class="progress">
-    <span class="progress__progress"></span>
+    <span class="progress__inner"></span>
   </span>
 </template>
 
@@ -15,7 +15,7 @@
     animation: blink 0.8s linear infinite;
     cursor: wait;
 
-    &__progress {
+    &__inner {
       position: relative;
       text-align: center;
       width: 1em;

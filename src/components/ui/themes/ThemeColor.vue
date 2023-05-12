@@ -1,11 +1,10 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue'
 
-  const props =
-    defineProps<{
-      color: string
-      description?: string
-    }>()
+  const props = defineProps<{
+    color: string
+    description?: string
+  }>()
 
   const colorVar = computed(() => `--theme-${props.color}`)
   const colorRef = ref<HTMLElement | null>(null)

@@ -4,15 +4,13 @@
   import BaseButton from '../basics/BaseButton.vue'
   import BemTransition from '../transitions/BemTransition.vue'
 
-  const props =
-    defineProps<{
-      modelValue?: boolean
-    }>()
+  const props = defineProps<{
+    modelValue?: boolean
+  }>()
   const slots = useSlots()
-  const emit =
-    defineEmits<{
-      (e: 'update:modelValue', value: boolean): void
-    }>()
+  const emit = defineEmits<{
+    (e: 'update:modelValue', value: boolean): void
+  }>()
 
   const BLOCK_CLASS = 'modal'
 

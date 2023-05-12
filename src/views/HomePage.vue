@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import BaseButton from '@/components/ui/basics/BaseButton.vue'
-  import ModalDialog from '@/components/ui/dialogs/ModalDialog.vue'
+  import ModalOverlay from '@/components/ui/overlays/ModalOverlay.vue'
   import GutterGroup from '@/components/ui/groups/GutterGroup.vue'
   import { ButtonTheme } from '@/vars/ButtonAttr'
   import { ThemeName, ThemeProvider } from '@/vars/ThemeAttr'
@@ -28,22 +28,22 @@
     <BaseButton :theme="ButtonTheme.SECONDARY" @click="modal = true">
       Click to open
     </BaseButton>
-    <ModalDialog v-model="modal">
+    <ModalOverlay v-model="modal">
       <template #header>
         <strong>Buttons</strong>
       </template>
       <template #default>
-        <GutterGroup>
+        <GutterGroup wrap>
           <BaseButton
-            v-for="theme in Object.values(ButtonTheme)"
-            :key="theme"
-            :theme="theme"
+            v-for="selectedTheme in Object.values(ButtonTheme)"
+            :key="selectedTheme"
+            :theme="selectedTheme"
           >
-            {{ theme }}
+            {{ selectedTheme }}
           </BaseButton>
         </GutterGroup>
       </template>
-    </ModalDialog>
+    </ModalOverlay>
   </div>
 </template>
 

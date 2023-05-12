@@ -9,23 +9,22 @@
 
   const router = useRouter()
   const attrs = useAttrs()
-  const props =
-    defineProps<{
-      type?: ButtonType.BUTTON | ButtonType.SUBMIT
-      theme?: ButtonTheme
-      size?: ButtonSize
-      to?: RouteLocationRaw
-      href?: string
-      disabled?: boolean
-      pending?: boolean
-      block?: boolean
-      reverse?: boolean
-      rounded?: boolean
-      outlined?: boolean
-      tile?: boolean
-      text?: boolean
-      icon?: boolean
-    }>()
+  const props = defineProps<{
+    type?: ButtonType.BUTTON | ButtonType.SUBMIT
+    theme?: ButtonTheme
+    size?: ButtonSize
+    to?: RouteLocationRaw
+    href?: string
+    disabled?: boolean
+    pending?: boolean
+    block?: boolean
+    reverse?: boolean
+    rounded?: boolean
+    outlined?: boolean
+    tile?: boolean
+    text?: boolean
+    icon?: boolean
+  }>()
 
   const tag = computed(() =>
     props.disabled
@@ -130,7 +129,6 @@
     border-radius: var(--theme-border-radius);
     border: 0;
     padding: 0.6em 1.2em;
-    overflow: hidden;
     transition: all var(--theme-transition-duration);
     cursor: pointer;
 
@@ -164,11 +162,15 @@
       background: inherit;
       color: inherit;
 
-      &:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--pending):hover {
+      &:not([disabled]):not(#{$block-selector}--disabled):not(
+          #{$block-selector}--pending
+        ):hover {
         text-decoration: underline;
       }
 
-      &:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--pending):active {
+      &:not([disabled]):not(#{$block-selector}--disabled):not(
+          #{$block-selector}--pending
+        ):active {
         text-shadow: 0 0 0.0625em currentColor;
       }
     }
@@ -256,17 +258,22 @@
       left: 0;
       right: 0;
       bottom: 0;
+      border-radius: var(--theme-border-radius);
       background-color: currentColor;
       opacity: 0;
       pointer-events: none;
       transition: opacity var(--theme-transition-duration);
 
-      #{$block-selector}:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--pending):not(#{$block-selector}--text):hover
+      #{$block-selector}:not([disabled]):not(#{$block-selector}--disabled):not(
+          #{$block-selector}--pending
+        ):not(#{$block-selector}--text):hover
         & {
         opacity: 0.2;
       }
 
-      #{$block-selector}:not([disabled]):not(#{$block-selector}--disabled):not(#{$block-selector}--pending):not(#{$block-selector}--text):active
+      #{$block-selector}:not([disabled]):not(#{$block-selector}--disabled):not(
+          #{$block-selector}--pending
+        ):not(#{$block-selector}--text):active
         & {
         opacity: 0.5;
       }
