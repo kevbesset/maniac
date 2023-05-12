@@ -5,6 +5,11 @@
   import { ButtonTheme } from '@/vars/ButtonAttr'
   import { ThemeName, ThemeProvider } from '@/vars/ThemeAttr'
   import { inject, Ref, ref } from 'vue'
+  import { useI18n } from 'vue-i18n'
+  import { setLocale } from '@/i18n'
+  import { I18nLocale } from '@/vars/I18nAttr'
+
+  const { t, locale } = useI18n()
 
   const theme = inject<Readonly<Ref<ThemeName>>>(ThemeProvider.THEME)
   const setTheme = inject<(theme: ThemeName) => void>(ThemeProvider.SET_THEME)
@@ -17,20 +22,29 @@
       )
     }
   }
+
+  function toggleLocale() {
+    setLocale(locale.value === I18nLocale.FR ? I18nLocale.EN : I18nLocale.FR)
+  }
 </script>
 
 <template>
   <div class="home">
-    <h1>Welcome, maniac</h1>
-    <BaseButton icon rounded class="toggler" @click="toggleTheme">
-      🌙
-    </BaseButton>
+    <h1>{{ t('welcome') }}</h1>
+    <GutterGroup class="toolbox">
+      <BaseButton icon rounded class="toggler" @click="toggleLocale">
+        {{ t('locale') }}
+      </BaseButton>
+      <BaseButton icon rounded class="toggler" @click="toggleTheme">
+        {{ t('theme') }}
+      </BaseButton>
+    </GutterGroup>
     <BaseButton :theme="ButtonTheme.SECONDARY" @click="modal = true">
-      Click to open
+      {{ t('test') }}
     </BaseButton>
     <ModalOverlay v-model="modal">
       <template #header>
-        <strong>Buttons</strong>
+        <strong>{{ t('button') }}</strong>
       </template>
       <template #default>
         <GutterGroup wrap>
@@ -50,12 +64,31 @@
 <style scoped lang="scss">
   .home {
     text-align: center;
-    margin-top: 60px;
+    margin-top: 3.75em;
   }
 
-  .toggler {
+  .toolbox {
     position: fixed;
     bottom: 1.25em;
     right: 1.25em;
   }
 </style>
+
+<i18n lang="json">
+{
+  "fr": {
+    "welcome": "Bonjour, maniac",
+    "test": "Clique pour découvrir",
+    "button": "Boutons",
+    "theme": "🌙",
+    "locale": "🇫🇷"
+  },
+  "en": {
+    "welcome": "Welcome, maniac",
+    "test": "Click to open",
+    "button": "Buttons",
+    "theme": "🌙",
+    "locale": "🇬🇧"
+  }
+}
+</i18n>
