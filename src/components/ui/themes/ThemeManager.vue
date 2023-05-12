@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import BemTransition from '@/components/ui/transitions/BemTransition.vue'
+  import PersistentStorage from '@/libs/helpers/PersistentStorage'
   import { ThemeName, ThemeProvider } from '@/vars/ThemeAttr'
   import { nextTick, onMounted, provide, readonly, ref, watch } from 'vue'
 
@@ -14,7 +15,7 @@
     if (props.theme) return props.theme
 
     let defaultTheme =
-      (localStorage.getItem(STORAGE_KEY) as ThemeName) ||
+      (PersistentStorage.get(STORAGE_KEY) as ThemeName) ||
       (window.matchMedia &&
         window.matchMedia('(prefers-color-scheme: dark)').matches)
         ? ThemeName.DARK
@@ -89,7 +90,7 @@
   provide(ThemeProvider.SET_THEME, (newTheme: ThemeName, persist = false) => {
     prepare(newTheme)
     if (persist) {
-      localStorage.setItem(STORAGE_KEY, newTheme)
+      PersistentStorage.set(STORAGE_KEY, newTheme)
     }
   })
 </script>
