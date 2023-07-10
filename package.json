@@ -12,6 +12,9 @@
     "maniac": "./bin/index.js"
   },
   "dependencies": {
+    "@vee-validate/i18n": "^4.9.3",
+    "@vee-validate/rules": "^4.9.3",
+    "vee-validate": "^4.9.3",
     "vue": "^3.3.2",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.2.0"

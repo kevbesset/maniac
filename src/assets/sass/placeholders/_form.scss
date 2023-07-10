@@ -1,0 +1,21 @@
+%form__input {
+  display: block;
+  background: var(--theme-background-color);
+  border-radius: var(--theme-border-radius);
+  border: 1px solid var(--theme-border-color);
+  color: var(--theme-text-color);
+  padding: 0.875em 1em;
+  font-size: 1em;
+  outline: 0;
+  box-shadow: none;
+  width: 100%;
+
+  &:focus {
+    border-color: var(--theme-text-color);
+  }
+
+  &::placeholder {
+    opacity: 0.3;
+    color: var(--theme-text-color);
+  }
+}

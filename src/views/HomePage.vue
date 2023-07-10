@@ -2,18 +2,22 @@
   import BaseButton from '@/components/ui/basics/BaseButton.vue'
   import ModalOverlay from '@/components/ui/overlays/ModalOverlay.vue'
   import GutterGroup from '@/components/ui/groups/GutterGroup.vue'
-  import { ButtonTheme } from '@/vars/ButtonAttr'
+  import { ButtonTheme, ButtonType } from '@/vars/ButtonAttr'
   import { ThemeName, ThemeProvider } from '@/vars/ThemeAttr'
   import { inject, Ref, ref } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { setLocale } from '@/i18n'
   import { I18nLocale } from '@/vars/I18nAttr'
+  import FormRow from '@/components/ui/forms/FormRow.vue'
+  import FormField from '@/components/ui/forms/FormField.vue'
+  import { FormInputType } from '@/vars/FormAttr'
 
   const { t, locale } = useI18n()
 
   const theme = inject<Readonly<Ref<ThemeName>>>(ThemeProvider.THEME)
   const setTheme = inject<(theme: ThemeName) => void>(ThemeProvider.SET_THEME)
-  const modal = ref(false)
+  const buttonModal = ref(false)
+  const formModal = ref(false)
 
   function toggleTheme() {
     if (typeof setTheme !== 'undefined' && typeof theme !== 'undefined') {
@@ -39,10 +43,15 @@
         {{ t('theme') }}
       </BaseButton>
     </GutterGroup>
-    <BaseButton :theme="ButtonTheme.SECONDARY" @click="modal = true">
-      {{ t('test') }}
-    </BaseButton>
-    <ModalOverlay v-model="modal">
+    <GutterGroup direction="column">
+      <BaseButton :theme="ButtonTheme.SECONDARY" @click="buttonModal = true">
+        {{ t('test.button') }}
+      </BaseButton>
+      <BaseButton :theme="ButtonTheme.SECONDARY" @click="formModal = true">
+        {{ t('test.form') }}
+      </BaseButton>
+    </GutterGroup>
+    <ModalOverlay v-model="buttonModal">
       <template #header>
         <strong>{{ t('button') }}</strong>
       </template>
@@ -56,6 +65,42 @@
             {{ selectedTheme }}
           </BaseButton>
         </GutterGroup>
+      </template>
+    </ModalOverlay>
+    <ModalOverlay v-model="formModal">
+      <template #header>
+        <strong>{{ t('form') }}</strong>
+      </template>
+      <template #default>
+        <form @submit.prevent>
+          <FormRow>
+            <FormRow>
+              <FormField
+                id="login_identifier"
+                :placeholder="t('login.placeholder.email')"
+                :type="FormInputType.EMAIL"
+                name="identifier"
+                rules="email|required"
+              >
+                {{ t('login.labels.identifier') }}
+              </FormField>
+            </FormRow>
+            <FormRow>
+              <FormField
+                id="login_password"
+                :placeholder="t('login.placeholder.password')"
+                :type="FormInputType.PASSWORD"
+                name="password"
+                rules="required"
+              >
+                {{ t('login.labels.password') }}
+              </FormField>
+            </FormRow>
+            <BaseButton class="login__button" :type="ButtonType.SUBMIT" block>
+              {{ t('login.submit') }}
+            </BaseButton>
+          </FormRow>
+        </form>
       </template>
     </ModalOverlay>
   </div>
@@ -78,17 +123,47 @@
 {
   "fr": {
     "welcome": "Bonjour, maniac",
-    "test": "Clique pour découvrir",
+    "test": {
+      "button": "Découvrir les boutons",
+      "form": "Découvrir les formulaires"
+    },
     "button": "Boutons",
+    "form": "Formulaires",
     "theme": "🌙",
-    "locale": "🇫🇷"
+    "locale": "🇫🇷",
+    "login": {
+      "labels": {
+        "identifier": "Identifiant",
+        "password": "Mot de passe"
+      },
+      "placeholder": {
+        "email": "Saisissez votre identifiant",
+        "password": "********"
+      },
+      "submit": "Envoyer"
+    }
   },
   "en": {
     "welcome": "Welcome, maniac",
-    "test": "Click to open",
+    "test": {
+      "button": "Click for buttons",
+      "form": "Click for forms"
+    },
     "button": "Buttons",
+    "form": "Forms",
     "theme": "🌙",
-    "locale": "🇬🇧"
+    "locale": "🇬🇧",
+    "login": {
+      "labels": {
+        "identifier": "Identifier",
+        "password": "Password"
+      },
+      "placeholder": {
+        "email": "Write your identifier",
+        "password": "********"
+      },
+      "submit": "Send"
+    }
   }
 }
 </i18n>

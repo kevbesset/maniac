@@ -12,10 +12,12 @@
       center?: boolean
       block?: boolean
       wrap?: boolean
+      direction: 'row' | 'column'
     }>(),
     {
       tag: 'div',
       space: '1.25',
+      direction: 'row',
     }
   )
 
@@ -28,6 +30,7 @@
       [`${BLOCK_CLASS}--wrap`]: props.wrap,
       [`${BLOCK_CLASS}--center`]: props.center,
       [`${BLOCK_CLASS}--block`]: props.block,
+      [`${BLOCK_CLASS}--column`]: props.direction === 'column',
     },
   ])
 
@@ -84,6 +87,10 @@
     &--block {
       display: flex;
       width: 100%;
+    }
+
+    &--column {
+      flex-direction: column;
     }
 
     &--collapse:deep() [data-item] {

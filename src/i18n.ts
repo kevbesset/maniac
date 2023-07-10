@@ -1,6 +1,7 @@
 import { createI18n } from 'vue-i18n'
 import { I18nLocale } from '@/vars/I18nAttr'
 import PersistentStorage from '@/libs/helpers/PersistentStorage'
+import { setLocale as setFormLocale } from '@vee-validate/i18n'
 
 const LOCAL_STORAGE_KEY = 'locale'
 const FALLBACK_LOCALE = I18nLocale.FR
@@ -32,6 +33,7 @@ export function setLocale(newLocale: I18nLocale) {
   const { locale } = i18n.global
   PersistentStorage.set(LOCAL_STORAGE_KEY, newLocale)
   locale.value = newLocale
+  setFormLocale(newLocale)
 }
 
 export default i18n

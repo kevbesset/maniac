@@ -4,6 +4,9 @@ import { placeholder } from './directives/placeholder'
 import router from './router'
 import i18n from './i18n'
 
+// vendors
+import '@/libs/vendors/veeValidate'
+
 const app = createApp(App)
 
 // Directives
