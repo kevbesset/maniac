@@ -14,6 +14,7 @@
   "dependencies": {
     "@vee-validate/i18n": "^4.10.6",
     "@vee-validate/rules": "^4.10.6",
+    "animate.css": "^4.1.1",
     "vee-validate": "^4.10.6",
     "vue": "^3.3.4",
     "vue-i18n": "^9.2.2",
