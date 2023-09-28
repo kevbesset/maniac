@@ -1,179 +1,184 @@
 <script setup lang="ts">
-  import { ButtonTheme } from '@/vars/ButtonAttr'
-  import { computed, nextTick, onBeforeUnmount, onMounted, useSlots } from 'vue'
-  import BaseButton from '../basics/BaseButton.vue'
+  import {
+    computed,
+    ref,
+    watch,
+    onMounted,
+    onUnmounted,
+    useSlots,
+    nextTick,
+  } from 'vue'
+  import BaseIcon from '@/components/ui/basics/BaseIcon.vue'
+  import BaseButton from '@/components/ui/basics/BaseButton.vue'
   import BemTransition from '../transitions/BemTransition.vue'
 
   const props = defineProps<{
     modelValue?: boolean
+    hideClose?: boolean
+    persistent?: boolean
+  }>()
+
+  const emit = defineEmits<{
+    (event: 'update:modelValue', value: boolean): void
+    (event: 'before-open'): void
+    (event: 'before-close'): void
   }>()
   const slots = useSlots()
-  const emit = defineEmits<{
-    (e: 'update:modelValue', value: boolean): void
-  }>()
 
-  const BLOCK_CLASS = 'modal'
+  const modal = ref<HTMLDialogElement>()
 
-  const open = computed({
-    get() {
-      return !!props.modelValue
-    },
-    set(value: boolean) {
+  const modalOpen = computed({
+    get: () => props.modelValue,
+    set: (value) => {
       emit('update:modelValue', value)
     },
   })
 
-  const afterEnterTransition = () => {
-    document.body.style.overflow = 'hidden'
-  }
+  watch(modalOpen, () => {
+    if (modalOpen.value) {
+      nextTick(() => {
+        modal.value?.showModal()
+        bindEvents()
+      })
+    } else {
+      modal.value?.close()
+    }
+  })
 
-  const afterLeaveTransition = () => {
-    nextTick(() => {
-      const hasOtherModal = document.querySelector(
-        `.${BLOCK_CLASS} .${BLOCK_CLASS}__body[role=dialog]`
-      )
-      if (!hasOtherModal) {
-        document.body.style.overflow = ''
+  onMounted(() => {
+    bindEvents()
+  })
+
+  onUnmounted(() => {
+    if (modal.value) {
+      modal.value.removeEventListener('close', () => {
+        modalOpen.value = false
+      })
+      modal.value.removeEventListener('cancel', () => {
+        //
+      })
+    }
+  })
+
+  function bindEvents() {
+    if (modal.value) {
+      modal.value.addEventListener('close', () => {
+        modalOpen.value = false
+      })
+
+      if (props.persistent) {
+        modal.value.addEventListener('cancel', (event) => {
+          event.preventDefault()
+        })
       }
-    })
-  }
-  function onKeydown(e: KeyboardEvent) {
-    if (e.key === 'Escape' && open.value) {
-      open.value = false
     }
   }
 
-  onMounted(() => {
-    window.addEventListener('keydown', onKeydown)
-  })
-
-  onBeforeUnmount(() => {
-    window.removeEventListener('keydown', onKeydown)
-  })
+  function onBackdropClick() {
+    if (!props.persistent) {
+      modalOpen.value = false
+    }
+  }
 </script>
 
 <template>
   <Teleport to="body">
-    <BemTransition
-      name="modal"
-      @after-enter="afterEnterTransition"
-      @after-leave="afterLeaveTransition"
-    >
-      <div v-if="open" :class="BLOCK_CLASS" @click="open = false">
-        <div :class="`${BLOCK_CLASS}__inner`" role="dialog" @click.stop>
-          <div :class="`${BLOCK_CLASS}__close`">
-            <BaseButton
-              :theme="ButtonTheme.SECONDARY"
-              icon
-              rounded
-              @click="open = false"
-            >
-              ✕
+    <BemTransition name="modal">
+      <dialog
+        v-if="modalOpen"
+        ref="modal"
+        class="modal"
+        @click="onBackdropClick"
+      >
+        <div class="modal__inner" @click.stop>
+          <div class="modal__close">
+            <BaseButton v-if="!hideClose" text @click="modalOpen = false">
+              <BaseIcon name="close" />
             </BaseButton>
           </div>
-          <header v-if="slots.header" :class="`${BLOCK_CLASS}__header`">
+          <header v-if="slots.header" class="modal__header">
             <slot name="header"></slot>
           </header>
-          <div v-if="slots.default" :class="`${BLOCK_CLASS}__body`">
-            <slot name="default"></slot>
-          </div>
-          <footer v-if="slots.footer" :class="`${BLOCK_CLASS}__footer`">
+          <article v-if="slots.default" class="modal__body">
+            <slot></slot>
+          </article>
+
+          <footer v-if="slots.footer" class="modal__footer">
             <slot name="footer"></slot>
           </footer>
         </div>
-      </div>
+      </dialog>
     </BemTransition>
   </Teleport>
 </template>
 
 <style scoped lang="scss">
   .modal {
-    $block-selector: &;
-
-    position: fixed;
-    top: 0;
-    left: 0;
+    display: block;
+    inset: 0;
+    background-color: var(--theme-background-color);
+    color: var(--theme-text-color);
+    border-radius: 0.5em;
+    box-shadow: 0.25em 0.25em 0.625em 0 var(--theme-shadow-color);
+    border: none;
     width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    width: calc(100% - 3em);
+    padding: 0;
+    max-width: 29.25em;
+    text-align: center;
+    box-shadow: 0.25em 0.25em 0.625em 0 rgba(0, 0, 0, 0.1);
 
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: var(--theme-text-color);
-      opacity: 0.3;
+    &:not([open]) {
+      pointer-events: none;
+    }
+
+    &::backdrop {
+      background-color: rgba(12, 12, 12, 0.5);
+      backdrop-filter: blur(0.25em);
     }
 
     &--enter-active,
     &--leave-active {
-      transition: opacity var(--theme-transition-duration);
+      transition-property: transform, opacity;
+      transition-duration: 350ms;
+
+      &::backdrop {
+        transition: background-color 350ms;
+      }
     }
 
     &--enter-from,
     &--leave-to {
+      transform: scale(1.3);
       opacity: 0;
-    }
 
-    &__close {
-      position: absolute;
-      z-index: 2;
-      top: 1em;
-      right: 1.25em;
+      &::backdrop {
+        background-color: transparent;
+      }
     }
 
     &__inner {
-      position: relative;
-      background-color: var(--theme-background-color);
-      color: var(--theme-text-color);
-      border-radius: var(--theme-border-radius);
-      margin: auto;
-      width: 100%;
-      max-width: calc(100% - 2.5em);
-      max-height: calc(100% - 2.5em);
+      padding: 2em;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
+      gap: 2em;
+    }
 
-      @media screen and (min-width: 35em) {
-        min-width: 32.5em;
-        width: auto;
-      }
-
-      #{$block-selector}--enter-active &,
-      #{$block-selector}--leave-active & {
-        transition: transform var(--theme-transition-duration);
-      }
-
-      #{$block-selector}--enter-from &,
-      #{$block-selector}--leave-to & {
-        transform: scale(1.3);
-        transform-origin: center;
-      }
+    &__close {
+      display: flex;
+      justify-content: flex-end;
+      font-size: 1.5em;
     }
 
     &__header {
-      padding: 1.25em;
-      border-bottom: 1px solid var(--theme-secondary-color);
-    }
-
-    &__body {
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      padding: 2em 1.25em;
-      flex: 1;
+      font-size: 1.5em;
+      font-weight: bold;
     }
 
     &__footer {
-      padding: 1.25em;
-      background-color: var(--theme-secondary-color);
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
     }
   }
 </style>

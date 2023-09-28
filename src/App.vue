@@ -3,7 +3,7 @@
   import { useRoute } from 'vue-router'
   import DefaultLayout from '@/components/layouts/DefaultLayout.vue'
   import EmptyLayout from '@/components/layouts/EmptyLayout.vue'
-  import ThemeManager from './components/ui/themes/ThemeManager.vue'
+  import ThemeManager from '@/components/ui/themes/ThemeManager.vue'
 
   const route = useRoute()
 

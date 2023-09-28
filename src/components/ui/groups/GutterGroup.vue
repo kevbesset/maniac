@@ -12,7 +12,7 @@
       center?: boolean
       block?: boolean
       wrap?: boolean
-      direction: 'row' | 'column'
+      direction?: 'row' | 'column'
     }>(),
     {
       tag: 'div',
