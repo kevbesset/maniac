@@ -16,7 +16,7 @@
     }>(),
     {
       tag: 'div',
-      space: '1.25',
+      space: 1,
       direction: 'row',
     }
   )
