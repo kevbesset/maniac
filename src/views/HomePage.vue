@@ -34,8 +34,8 @@
 
 <template>
   <div class="home">
-    <h1 v-appear>{{ t('welcome') }}</h1>
-    <GutterGroup v-appear="'fadeIn'" class="toolbox">
+    <h1>{{ t('welcome') }}</h1>
+    <GutterGroup class="toolbox">
       <BaseButton icon rounded class="toggler" @click="toggleLocale">
         {{ t('locale') }}
       </BaseButton>
@@ -43,7 +43,7 @@
         {{ t('theme') }}
       </BaseButton>
     </GutterGroup>
-    <GutterGroup v-appear direction="column">
+    <GutterGroup direction="column">
       <BaseButton :theme="ButtonTheme.SECONDARY" @click="buttonModal = true">
         {{ t('test.button') }}
       </BaseButton>

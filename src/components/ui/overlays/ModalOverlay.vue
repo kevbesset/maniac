@@ -1,25 +1,15 @@
 <script setup lang="ts">
-  import {
-    computed,
-    ref,
-    watch,
-    onMounted,
-    onUnmounted,
-    useSlots,
-    nextTick,
-  } from 'vue'
+  import { ref, watch, onMounted, onUnmounted, useSlots, nextTick } from 'vue'
   import BaseIcon from '@/components/ui/basics/BaseIcon.vue'
   import BaseButton from '@/components/ui/basics/BaseButton.vue'
   import BemTransition from '../transitions/BemTransition.vue'
 
   const props = defineProps<{
-    modelValue?: boolean
     hideClose?: boolean
     persistent?: boolean
   }>()
 
-  const emit = defineEmits<{
-    (event: 'update:modelValue', value: boolean): void
+  defineEmits<{
     (event: 'before-open'): void
     (event: 'before-close'): void
   }>()
@@ -27,12 +17,7 @@
 
   const modal = ref<HTMLDialogElement>()
 
-  const modalOpen = computed({
-    get: () => props.modelValue,
-    set: (value) => {
-      emit('update:modelValue', value)
-    },
-  })
+  const modalOpen = defineModel()
 
   watch(modalOpen, () => {
     checkModalState()
