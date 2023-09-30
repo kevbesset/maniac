@@ -117,6 +117,7 @@
     max-width: 29.25em;
     text-align: center;
     box-shadow: 0.25em 0.25em 0.625em 0 rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 
     &:not([open]) {
       pointer-events: none;
@@ -139,12 +140,16 @@
 
     &--enter-from,
     &--leave-to {
-      transform: scale(1.3);
+      transform: translate3d(0, 50%, 0);
       opacity: 0;
 
       &::backdrop {
         background-color: transparent;
       }
+    }
+
+    &--leave-to {
+      transform: translate3d(0, -50%, 0);
     }
 
     &__inner {
