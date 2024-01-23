@@ -8,9 +8,7 @@ import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 export default defineConfig({
   plugins: [
     vue(),
-    eslint({
-      fix: true,
-    }),
+    eslint(),
     VueI18n({}),
   ],
   resolve: {
