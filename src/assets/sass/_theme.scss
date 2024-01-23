@@ -8,12 +8,12 @@
     --theme-background-color: white;
 
     // text colors
-    --theme-text-color: #213547;
+    --theme-text-color: #1e1f24;
 
     // themed colors
     --theme-primary-color: #646cff;
     --theme-primary-text-color: white;
-    --theme-secondary-color: #f9f9f9;
+    --theme-secondary-color: #f4f7f9;
     --theme-secondary-text-color: var(--theme-text-color);
 
     // status colors
@@ -27,13 +27,14 @@
     // Custom themes
     &--dark {
       // background colors
-      --theme-background-color: #213547;
+      --theme-background-color: #1e1f24;
 
       // text colors
       --theme-text-color: white;
+      --theme-text-color--secondary: #f4f7f9;
 
       // themed colors
-      --theme-secondary-color: #2c4760;
+      --theme-secondary-color: #626262;
     }
   }
 }
