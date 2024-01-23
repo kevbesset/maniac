@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import EmptyLayout from './components/layouts/EmptyLayout.vue'
-import { RouteContext, RouteMiddleware } from './types/Router.type'
-import { RouteName } from './vars/RouteName'
+import EmptyLayout from '@/components/layouts/EmptyLayout.vue'
+import { RouteContext, RouteMiddleware } from '@/types/Router.type'
+import { RouteName } from '@/vars/RouteName'
 
 // Non-chunked views
 
@@ -9,15 +9,15 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: RouteName.HOME,
-    component: () => import('./views/HomePage.vue'),
+    component: () => import('@/views/HomePage.vue')
   },
   {
     path: '/:pathMatch(.*)*',
-    component: () => import('./views/NotFoundPage.vue'),
+    component: () => import('@/views/NotFoundPage.vue'),
     meta: {
-      layout: EmptyLayout,
-    },
-  },
+      layout: EmptyLayout
+    }
+  }
 ]
 
 const router = createRouter({
@@ -27,15 +27,15 @@ const router = createRouter({
     if (to.hash) {
       return {
         el: to.hash,
-        behavior: 'smooth',
+        behavior: 'smooth'
       }
     }
 
     return {
       top: 0,
-      behavior: 'smooth',
+      behavior: 'smooth'
     }
-  },
+  }
 })
 
 // Creates a `nextMiddleware()` function which not only
@@ -74,7 +74,7 @@ router.beforeEach((to, from, next) => {
     from,
     next,
     router,
-    to,
+    to
   }
   const nextMiddleware = nextFactory(context, middlewares, 1)
 

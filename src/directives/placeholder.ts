@@ -115,6 +115,6 @@ function isSelfClosing(el: HTMLElement) {
     'param',
     'source',
     'track',
-    'wbr',
+    'wbr'
   ].includes(el.tagName.toLowerCase())
 }

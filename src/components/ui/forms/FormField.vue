@@ -1,6 +1,6 @@
 <script lang="ts">
   export default {
-    inheritAttrs: false,
+    inheritAttrs: false
   }
 </script>
 
@@ -43,7 +43,7 @@
     props.name,
     props.rules,
     {
-      initialValue: props.modelValue,
+      initialValue: props.modelValue
     }
   )
 
@@ -77,7 +77,7 @@
       :required="required"
       class="field__label"
       :class="{
-        'field__label--sr-only': hideLabel,
+        'field__label--sr-only': hideLabel
       }"
     >
       <slot></slot>
@@ -92,7 +92,7 @@
       :theme="theme"
       class="field__input"
       :class="{
-        'field__input--error': errors?.length,
+        'field__input--error': errors?.length
       }"
       @input="handleChange"
       @blur="handleBlur"

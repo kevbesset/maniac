@@ -22,7 +22,7 @@
     :for="inputId"
     class="label"
     :class="{
-      'label--required': required && !removeAsterisk,
+      'label--required': required && !removeAsterisk
     }"
   >
     <slot></slot>

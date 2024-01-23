@@ -23,7 +23,7 @@ export default class PersistentStorage {
 
     const item = {
       value,
-      expiration: expiration && now.getTime() + expiration,
+      expiration: expiration && now.getTime() + expiration
     }
 
     localStorage.setItem(key, JSON.stringify(item))

@@ -24,7 +24,7 @@
     :name="name"
     class="input"
     :class="{
-      'input--error': !meta?.valid,
+      'input--error': !meta?.valid
     }"
     @input="emit('input', $event)"
     @blur="emit('blur', $event)"

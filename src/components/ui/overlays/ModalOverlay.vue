@@ -17,7 +17,7 @@
 
   const modal = ref<HTMLDialogElement>()
 
-  const modalOpen = defineModel()
+  const modalOpen = defineModel<boolean>()
 
   watch(modalOpen, () => {
     checkModalState()

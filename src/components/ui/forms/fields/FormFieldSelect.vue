@@ -23,8 +23,8 @@
     BLOCK_CLASS,
     `${BLOCK_CLASS}--${props.theme}`,
     {
-      [`${BLOCK_CLASS}--error`]: !props.meta?.valid,
-    },
+      [`${BLOCK_CLASS}--error`]: !props.meta?.valid
+    }
   ])
 </script>
 

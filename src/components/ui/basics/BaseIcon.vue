@@ -9,7 +9,7 @@
   <span
     class="icon icon--material"
     :class="{
-      'icon--fill': fill,
+      'icon--fill': fill
     }"
     >{{ name }}</span
   >

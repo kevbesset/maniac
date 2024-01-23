@@ -1,9 +1,9 @@
 export enum ThemeName {
   DEFAULT = 'default',
-  DARK = 'dark',
+  DARK = 'dark'
 }
 
 export enum ThemeProvider {
   THEME = 'theme',
-  SET_THEME = 'setTheme',
+  SET_THEME = 'setTheme'
 }

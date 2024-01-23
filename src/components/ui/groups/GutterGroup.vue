@@ -17,7 +17,7 @@
     {
       tag: 'div',
       space: 1,
-      direction: 'row',
+      direction: 'row'
     }
   )
 
@@ -30,8 +30,8 @@
       [`${BLOCK_CLASS}--wrap`]: props.wrap,
       [`${BLOCK_CLASS}--center`]: props.center,
       [`${BLOCK_CLASS}--block`]: props.block,
-      [`${BLOCK_CLASS}--column`]: props.direction === 'column',
-    },
+      [`${BLOCK_CLASS}--column`]: props.direction === 'column'
+    }
   ])
 
   function updateSlots() {
@@ -50,7 +50,7 @@
       updateSlots()
       observer.observe(group.value, {
         childList: true,
-        subtree: true,
+        subtree: true
       })
     }
   })

@@ -11,6 +11,6 @@ Object.keys(AllRules).forEach((rule) => {
 configure({
   generateMessage: localize({
     en,
-    fr,
-  }),
+    fr
+  })
 })

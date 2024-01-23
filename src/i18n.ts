@@ -26,7 +26,7 @@ function defaultLocale() {
 const i18n = createI18n({
   legacy: false, // you must set `false`, to use Composition API
   locale: defaultLocale(), // set locale
-  fallbackLocale: FALLBACK_LOCALE, // set fallback locale
+  fallbackLocale: FALLBACK_LOCALE // set fallback locale
 })
 
 export function setLocale(newLocale: I18nLocale) {

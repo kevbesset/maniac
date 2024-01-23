@@ -109,7 +109,7 @@
         ref="switcher"
         :class="[
           `${BLOCK_CLASS}__switcher`,
-          `${BLOCK_CLASS}__switcher--${switchTheme}`,
+          `${BLOCK_CLASS}__switcher--${switchTheme}`
         ]"
       ></div>
     </BemTransition>

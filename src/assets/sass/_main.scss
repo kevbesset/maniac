@@ -7,6 +7,9 @@
 // Transitions
 @import './transitions/page';
 
+// Others
+@import 'reset';
+
 html,
 body {
   box-sizing: border-box;
@@ -17,12 +20,6 @@ body {
   line-height: 1.5;
   background-color: var(--theme-background-color);
   color: var(--theme-text-color);
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
 }
 
 a {

@@ -3,11 +3,10 @@
   import BemTransition from '@/components/ui/transitions/BemTransition.vue'
   import { ButtonSize, ButtonTheme, ButtonType } from '@/vars/ButtonAttr'
   import { computed, useAttrs } from 'vue'
-  import { RouteLocationRaw, useRouter } from 'vue-router'
+  import { RouteLocationRaw } from 'vue-router'
 
   const BLOCK_CLASS = 'button'
 
-  const router = useRouter()
   const attrs = useAttrs()
   const props = defineProps<{
     type?: ButtonType.BUTTON | ButtonType.SUBMIT
@@ -30,10 +29,10 @@
     props.disabled
       ? ButtonType.BUTTON
       : props.to
-      ? ButtonType.ROUTER_LINK
-      : typeof props.href !== 'undefined'
-      ? ButtonType.LINK
-      : ButtonType.BUTTON
+        ? ButtonType.ROUTER_LINK
+        : typeof props.href !== 'undefined'
+          ? ButtonType.LINK
+          : ButtonType.BUTTON
   )
 
   const typeAttr = computed(() => {
@@ -66,26 +65,28 @@
       [`${BLOCK_CLASS}--outlined`]: props.outlined,
       [`${BLOCK_CLASS}--text`]: props.text,
       [`${BLOCK_CLASS}--tile`]: props.tile,
-      [`${BLOCK_CLASS}--icon`]: props.icon,
-    },
+      [`${BLOCK_CLASS}--icon`]: props.icon
+    }
   ])
 
   const boundings = computed(() => {
-    const href =
-      typeof props.href !== 'undefined'
-        ? props.href
-        : props.to
-        ? router.resolve(props.to).href
-        : undefined
-    return {
+    const attributes: { [key: string]: unknown } = {
       ...attrs,
       role: tag.value !== ButtonType.BUTTON ? 'button' : undefined,
-      disabled: props.disabled || undefined,
       to: props.to,
-      href,
       type: typeAttr.value,
-      class: [attrs.class, ...classList.value],
+      class: [attrs.class, ...classList.value]
     }
+
+    if (props.disabled) {
+      attributes.disabled = props.disabled
+    }
+
+    if (props.href) {
+      attributes.href = props.href
+    }
+
+    return attributes
   })
 </script>
 

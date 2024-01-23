@@ -8,7 +8,7 @@
       group?: boolean
     }>(),
     {
-      mode: 'out-in',
+      mode: 'out-in'
     }
   )
 
@@ -23,7 +23,7 @@
   const boundings = computed(() => ({
     ...useAttrs(),
     name: transitionName.value,
-    mode: props.mode,
+    mode: props.mode
   }))
 </script>
 
