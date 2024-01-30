@@ -78,12 +78,12 @@
       class: [attrs.class, ...classList.value]
     }
 
-    if (props.disabled) {
-      attributes.disabled = props.disabled
-    }
-
     if (props.href) {
       attributes.href = props.href
+    }
+
+    if (props.disabled) {
+      attributes.disabled = props.disabled
     }
 
     return attributes

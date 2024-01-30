@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 // import { appear } from './directives/appear'
-import { placeholder } from './directives/placeholder'
+import placeholder from './directives/placeholder'
 import router from './router'
 import i18n from './i18n'
 

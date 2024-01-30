@@ -95,7 +95,7 @@ class Placeholder {
   }
 }
 
-export const placeholder = (el: HTMLElement, bindings: DirectiveBinding) =>
+const placeholder = (el: HTMLElement, bindings: DirectiveBinding) =>
   new Placeholder(el, bindings)
 
 function isSelfClosing(el: HTMLElement) {
@@ -118,3 +118,5 @@ function isSelfClosing(el: HTMLElement) {
     'wbr'
   ].includes(el.tagName.toLowerCase())
 }
+
+export default placeholder
