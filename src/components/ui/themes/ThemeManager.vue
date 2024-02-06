@@ -1,35 +1,14 @@
 <script setup lang="ts">
   import BemTransition from '@/components/ui/transitions/BemTransition.vue'
-  import PersistentStorage from '@/libs/helpers/PersistentStorage'
-  import { ThemeName, ThemeProvider } from '@/vars/ThemeAttr'
-  import { nextTick, onMounted, provide, readonly, ref, watch } from 'vue'
+  import { useTheme } from '@/libs/composables/theme'
+  import { ThemeName } from '@/vars/ThemeAttr'
+  import { nextTick, onMounted, ref, watch } from 'vue'
 
   const BLOCK_CLASS = 'theme'
-  const STORAGE_KEY = 'theme'
 
-  const props = defineProps<{
-    theme?: ThemeName
-  }>()
-
-  function getDefaultTheme(): ThemeName {
-    if (props.theme) return props.theme
-
-    let defaultTheme =
-      (PersistentStorage.get(STORAGE_KEY) as ThemeName) ||
-      (window.matchMedia &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-        ? ThemeName.DARK
-        : ThemeName.DEFAULT
-
-    if (!Object.values(ThemeName).includes(defaultTheme)) {
-      defaultTheme = ThemeName.DEFAULT
-    }
-
-    return defaultTheme
-  }
-
+  const { theme } = useTheme()
   const switcher = ref<HTMLElement | null>(null)
-  const currentTheme = ref<ThemeName>(getDefaultTheme())
+  const currentTheme = ref<ThemeName>(theme.value)
   const switching = ref(false)
   const switchTheme = ref<ThemeName>(ThemeName.DEFAULT)
   const nextTheme = ref<ThemeName>(currentTheme.value)
@@ -64,14 +43,11 @@
     document.body.classList.add(`${BLOCK_CLASS}--${newTheme}`)
   })
 
-  watch(
-    () => props.theme,
-    () => {
-      if (props.theme) {
-        prepare(props.theme)
-      }
+  watch(theme, () => {
+    if (theme.value) {
+      prepare(theme.value)
     }
-  )
+  })
 
   function afterEnterTransition() {
     if (switcher.value) {
@@ -85,14 +61,6 @@
       switcher.value.innerHTML = '' // reset switcher content
     }
   }
-
-  provide(ThemeProvider.THEME, readonly(currentTheme))
-  provide(ThemeProvider.SET_THEME, (newTheme: ThemeName, persist = false) => {
-    prepare(newTheme)
-    if (persist) {
-      PersistentStorage.set(STORAGE_KEY, newTheme)
-    }
-  })
 </script>
 
 <template>

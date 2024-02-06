@@ -8,7 +8,7 @@
     meta?: FieldMeta<unknown>
     options?: FormOption[]
   }>()
-  
+
   const value = defineModel<unknown>()
 </script>
 
@@ -32,13 +32,11 @@
   @import '@/assets/sass/placeholders/form';
 
   .input {
+    @extend %form__input;
+
     border: none;
     background: none;
     box-shadow: none;
     border-radius: 0;
-
-    &:not(&--discret) {
-      @extend %form__input;
-    }
   }
 </style>

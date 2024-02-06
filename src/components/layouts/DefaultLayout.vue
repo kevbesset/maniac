@@ -1,24 +1,14 @@
 <script setup lang="ts">
   import BaseButton from '@/components/ui/basics/BaseButton.vue'
-  import { ThemeName, ThemeProvider } from '@/vars/ThemeAttr'
-  import { inject, Ref } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { setLocale } from '@/i18n'
   import { I18nLocale } from '@/vars/I18nAttr'
   import BemTransition from '../ui/transitions/BemTransition.vue'
+  import { useTheme } from '@/libs/composables/theme'
 
   const { t, locale } = useI18n()
 
-  const theme = inject<Readonly<Ref<ThemeName>>>(ThemeProvider.THEME)
-  const setTheme = inject<(theme: ThemeName) => void>(ThemeProvider.SET_THEME)
-
-  function toggleTheme() {
-    if (typeof setTheme !== 'undefined' && typeof theme !== 'undefined') {
-      setTheme(
-        theme.value === ThemeName.DEFAULT ? ThemeName.DARK : ThemeName.DEFAULT,
-      )
-    }
-  }
+  const { toggle: toggleTheme } = useTheme()
 
   function toggleLocale() {
     setLocale(locale.value === I18nLocale.FR ? I18nLocale.EN : I18nLocale.FR)

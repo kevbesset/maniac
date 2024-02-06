@@ -10,7 +10,7 @@ export enum ButtonTheme {
   DEFAULT = 'default',
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
-  DISCRET = 'discret'
+  DISCRETE = 'discrete'
 }
 
 // From smaller to bigger

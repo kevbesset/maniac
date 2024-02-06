@@ -207,7 +207,7 @@
     }
 
     // themes
-    &--discret {
+    &--discrete {
       color: inherit;
       background: none;
       border: inherit;

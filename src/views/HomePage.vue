@@ -3,11 +3,11 @@
   import ModalOverlay from '@/components/ui/overlays/ModalOverlay.vue'
   import GutterGroup from '@/components/ui/groups/GutterGroup.vue'
   import { ButtonTheme, ButtonType } from '@/vars/ButtonAttr'
-  import {  ref } from 'vue'
+  import { ref } from 'vue'
   import { useI18n } from 'vue-i18n'
   import FormRow from '@/components/ui/forms/FormRow.vue'
   import FormField from '@/components/ui/forms/FormField.vue'
-import { useForm } from 'vee-validate'
+  import { useForm } from 'vee-validate'
 
   const { t } = useI18n()
 
@@ -95,12 +95,6 @@ import { useForm } from 'vee-validate'
 
   h1 {
     margin-bottom: 2em;
-  }
-
-  .toolbox {
-    position: fixed;
-    bottom: 1.25em;
-    right: 1.25em;
   }
 </style>
 

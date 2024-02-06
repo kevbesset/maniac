@@ -111,7 +111,6 @@
     border-radius: var(--theme-border-radius);
     box-shadow: 0.25em 0.25em 0.625em 0 var(--theme-shadow-color);
     border: none;
-    width: 100%;
     width: calc(100% - 3em);
     padding: 0;
     max-width: 29.25em;
