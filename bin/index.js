@@ -1,10 +1,8 @@
 #!/usr/bin/env node
-
-const { program } = require('commander')
-const { createNvmFile } = require('../lib/createNvmFile')
-const { createProject } = require('../lib/createProject')
-const { installPackage } = require('../lib/addPackage')
-const { runStorybook } = require('../lib/runDoc')
+import { program } from 'commander'
+import createNvmFile from '../lib/createNvmFile.js'
+import createProject from '../lib/createProject.js'
+import addPackage from '../lib/addPackage.js'
 
 program
   .name('maniac')
@@ -15,7 +13,7 @@ program
   .description('create a project')
   .argument('<project-name>', 'project name')
   .action((name, options) => {
-    console.log('We create a project named', name)
+    console.info('We create a project named', name)
     createProject(name, options)
   })
 
@@ -28,16 +26,8 @@ program
     const { args } = action
 
     args.forEach((pkg) => {
-      installPackage(pkg, options)
+      addPackage(pkg, options)
     })
-  })
-
-program
-  .command('docs')
-  .description('show design system')
-  .action(() => {
-    console.log('Start storybook')
-    runStorybook()
   })
 
 program

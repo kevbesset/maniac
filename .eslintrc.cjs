@@ -21,7 +21,7 @@ module.exports = {
     ecmaVersion: 'latest'
   },
   rules: {
-    'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
     'prettier/prettier': ['off'],
