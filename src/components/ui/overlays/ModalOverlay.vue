@@ -118,6 +118,7 @@
     text-align: center;
     box-shadow: 0.25em 0.25em 0.625em 0 rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    margin: auto;
 
     &:not([open]) {
       pointer-events: none;

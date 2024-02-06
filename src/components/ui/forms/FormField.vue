@@ -1,9 +1,3 @@
-<script lang="ts">
-  export default {
-    inheritAttrs: false
-  }
-</script>
-
 <script setup lang="ts">
   import { useField } from 'vee-validate'
   import { computed, useAttrs } from 'vue'
@@ -11,45 +5,40 @@
   import FormFieldInput from './fields/FormFieldInput.vue'
   import FormLabel from './FormLabel.vue'
   import FormErrorList from './FormErrorList.vue'
-  import { FormInputType, FormTheme } from '@/vars/FormAttr'
-  import { FormFieldModelValue, FormOption } from '@/types/Form.type'
-  import { uniqueId } from '@/libs/helpers/identifier'
+  import { FormOption } from '@/types/Form.type'
+import { InputTypeHTMLAttribute } from 'vue'
 
-  const { class: classList, ...attrs } = useAttrs()
 
+  defineOptions({
+    inheritAttrs: false
+  })
   const props = defineProps<{
     name: string
     id?: string
-    type?: FormInputType
-    rules?: string | Record<string, unknown>
-    modelValue?: FormFieldModelValue
+    type?: InputTypeHTMLAttribute | 'select'
+    rules?: string
     options?: FormOption[]
-    theme?: FormTheme
     hideLabel?: boolean
   }>()
+  const inputValue = defineModel<unknown>()
 
-  const inputId = computed(() => props.id || `${props.name}-${uniqueId()}`)
+  const { class: classList, ...attrs } = useAttrs()
+const { errors, value, meta } = useField(
+  props.name,
+  props.rules,
+  {
+    initialValue: inputValue.value
+  }
+)
   const required = computed(() => {
-    if (!props.rules) return false
+    if (!attrs.required) return true
 
-    if (typeof props.rules === 'string') {
-      return props.rules.includes('required')
-    }
-
-    return Object.keys(props.rules).includes('required')
+    return props.rules?.includes('required')
   })
-
-  const { errors, handleChange, handleBlur, value, meta } = useField(
-    props.name,
-    props.rules,
-    {
-      initialValue: props.modelValue
-    }
-  )
 
   const inputComponent = computed(() => {
     switch (props.type) {
-      case FormInputType.SELECT:
+      case 'select':
         return FormFieldSelect
       default:
         return FormFieldInput
@@ -60,7 +49,7 @@
     const bindings = { ...attrs }
 
     // Use custom binding according to form input type
-    if (props.type === FormInputType.SELECT) {
+    if (props.type === 'select') {
       bindings.options = props.options
     } else {
       bindings.type = props.type
@@ -73,7 +62,7 @@
 <template>
   <div class="field" :class="classList">
     <FormLabel
-      :input-id="inputId"
+      :input-id="id"
       :required="required"
       class="field__label"
       :class="{
@@ -84,18 +73,15 @@
     </FormLabel>
     <Component
       :is="inputComponent"
+      :id="id"
       v-bind="inputBoundings"
-      :id="inputId"
+      v-model="value"
       :name="name"
       :meta="meta"
-      :value="value"
-      :theme="theme"
       class="field__input"
       :class="{
         'field__input--error': errors?.length
       }"
-      @input="handleChange"
-      @blur="handleBlur"
     />
     <FormErrorList
       v-if="errors?.length"

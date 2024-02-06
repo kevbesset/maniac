@@ -1,0 +1,15 @@
+%typo {
+  font-size: 1em;
+  font-family: var(--theme-font);
+  font-weight: normal;
+  line-height: 1.5;
+  color: var(--theme-text-color);
+}
+
+%typo--secondary {
+  color: var(--theme-text-color--secondary);
+}
+
+%typo--subtext {
+  font-size: 0.875em;
+}

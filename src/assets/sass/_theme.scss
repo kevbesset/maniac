@@ -19,6 +19,13 @@
     // status colors
     --theme-error-color: red;
 
+    // fonts
+    --theme-font: Poppins, Inter, system-ui, Avenir, Helvetica, Arial,
+      sans-serif;
+
+    // sizes
+    --theme-container-width: 1870px;
+
     // misc
     --theme-transition-duration: 350ms;
     --theme-border-radius: 0.5em;
@@ -31,7 +38,6 @@
 
       // text colors
       --theme-text-color: white;
-      --theme-text-color--secondary: #f4f7f9;
 
       // themed colors
       --theme-secondary-color: #626262;

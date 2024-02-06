@@ -5,7 +5,7 @@ interface AppearOptions {
   duration?: 'slow' | 'slower' | 'fast' | 'faster'
 }
 
-export const appear = (el: HTMLElement, bindings: DirectiveBinding) => {
+const appear = (el: HTMLElement, bindings: DirectiveBinding) => {
   let animationName
   let options: AppearOptions = {}
 
@@ -14,7 +14,7 @@ export const appear = (el: HTMLElement, bindings: DirectiveBinding) => {
   } else if (typeof bindings.value === 'string') {
     animationName = bindings.value
   } else {
-    animationName = bindings.value.animation
+    animationName = bindings.value?.animation || 'fadeInUp'
     options = bindings.value
   }
 
@@ -24,3 +24,5 @@ export const appear = (el: HTMLElement, bindings: DirectiveBinding) => {
   }
   el.classList.add('animate__animated')
 }
+
+export default appear

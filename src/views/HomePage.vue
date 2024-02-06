@@ -3,46 +3,27 @@
   import ModalOverlay from '@/components/ui/overlays/ModalOverlay.vue'
   import GutterGroup from '@/components/ui/groups/GutterGroup.vue'
   import { ButtonTheme, ButtonType } from '@/vars/ButtonAttr'
-  import { ThemeName, ThemeProvider } from '@/vars/ThemeAttr'
-  import { inject, Ref, ref } from 'vue'
+  import {  ref } from 'vue'
   import { useI18n } from 'vue-i18n'
-  import { setLocale } from '@/i18n'
-  import { I18nLocale } from '@/vars/I18nAttr'
   import FormRow from '@/components/ui/forms/FormRow.vue'
   import FormField from '@/components/ui/forms/FormField.vue'
-  import { FormInputType } from '@/vars/FormAttr'
+import { useForm } from 'vee-validate'
 
-  const { t, locale } = useI18n()
+  const { t } = useI18n()
 
-  const theme = inject<Readonly<Ref<ThemeName>>>(ThemeProvider.THEME)
-  const setTheme = inject<(theme: ThemeName) => void>(ThemeProvider.SET_THEME)
   const buttonModal = ref(false)
   const formModal = ref(false)
 
-  function toggleTheme() {
-    if (typeof setTheme !== 'undefined' && typeof theme !== 'undefined') {
-      setTheme(
-        theme.value === ThemeName.DEFAULT ? ThemeName.DARK : ThemeName.DEFAULT
-      )
-    }
-  }
+  const { handleSubmit } = useForm()
 
-  function toggleLocale() {
-    setLocale(locale.value === I18nLocale.FR ? I18nLocale.EN : I18nLocale.FR)
-  }
+  const onSubmit = handleSubmit(() => {
+    //
+  })
 </script>
 
 <template>
   <div class="home">
     <h1>{{ t('welcome') }}</h1>
-    <GutterGroup class="toolbox">
-      <BaseButton icon rounded class="toggler" @click="toggleLocale">
-        {{ t('locale') }}
-      </BaseButton>
-      <BaseButton icon rounded class="toggler" @click="toggleTheme">
-        {{ t('theme') }}
-      </BaseButton>
-    </GutterGroup>
     <GutterGroup direction="column">
       <BaseButton :theme="ButtonTheme.SECONDARY" @click="buttonModal = true">
         {{ t('test.button') }}
@@ -72,13 +53,13 @@
         <strong>{{ t('form') }}</strong>
       </template>
       <template #default>
-        <form @submit.prevent>
+        <form @submit.prevent="onSubmit">
           <FormRow>
             <FormRow>
               <FormField
                 id="login_identifier"
                 :placeholder="t('login.placeholder.email')"
-                :type="FormInputType.EMAIL"
+                type="email"
                 name="identifier"
                 rules="email|required"
               >
@@ -89,7 +70,7 @@
               <FormField
                 id="login_password"
                 :placeholder="t('login.placeholder.password')"
-                :type="FormInputType.PASSWORD"
+                type="password"
                 name="password"
                 rules="required"
               >
@@ -109,7 +90,11 @@
 <style scoped lang="scss">
   .home {
     text-align: center;
-    margin-top: 3.75em;
+    padding-top: 3.75em;
+  }
+
+  h1 {
+    margin-bottom: 2em;
   }
 
   .toolbox {
@@ -129,8 +114,6 @@
     },
     "button": "Boutons",
     "form": "Formulaires",
-    "theme": "🌙",
-    "locale": "🇫🇷",
     "login": {
       "labels": {
         "identifier": "Identifiant",
@@ -151,8 +134,6 @@
     },
     "button": "Buttons",
     "form": "Forms",
-    "theme": "🌙",
-    "locale": "🇬🇧",
     "login": {
       "labels": {
         "identifier": "Identifier",

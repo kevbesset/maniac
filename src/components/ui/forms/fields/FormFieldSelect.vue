@@ -1,40 +1,26 @@
 <script setup lang="ts">
-  import { FormFieldInputModelValue, FormOption } from '@/types/Form.type'
-  import { FormTheme } from '@/vars/FormAttr'
+  import { FormOption } from '@/types/Form.type'
   import { FieldMeta } from 'vee-validate'
-  import { computed } from 'vue'
 
-  const BLOCK_CLASS = 'input'
-
-  const props = defineProps<{
+  defineProps<{
     name: string
     id?: string
-    meta?: FieldMeta<FormFieldInputModelValue>
+    meta?: FieldMeta<unknown>
     options?: FormOption[]
-    theme: FormTheme
   }>()
-
-  const emit = defineEmits<{
-    (e: 'input', event: Event): void
-    (e: 'blur', event: Event): void
-  }>()
-
-  const classList = computed(() => [
-    BLOCK_CLASS,
-    `${BLOCK_CLASS}--${props.theme}`,
-    {
-      [`${BLOCK_CLASS}--error`]: !props.meta?.valid
-    }
-  ])
+  
+  const value = defineModel<unknown>()
 </script>
 
 <template>
   <select
     :id="id"
+    v-model="value"
     :name="name"
-    :class="classList"
-    @input="emit('input', $event)"
-    @blur="emit('blur', $event)"
+    class="input"
+    :class="{
+      'input--error': !meta?.valid
+    }"
   >
     <option v-for="option in options" :key="option.value" :value="option.value">
       {{ option.label }}

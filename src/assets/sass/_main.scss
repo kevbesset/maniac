@@ -1,23 +1,22 @@
 // Vendors
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
 
-// Directives
-@import './placeholder';
+// Directives// Directives
+@import 'directives/placeholder';
+@import 'directives/bouncy';
+
+// Placeholders
+@import 'placeholder';
 
 // Transitions
-@import './transitions/page';
+@import 'transitions/page';
 
 // Others
 @import 'reset';
 
 html,
 body {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'DM Sans', Avenir, Helvetica, Arial, sans-serif;
-  width: 100%;
-  line-height: 1.5;
+  @extend %typo;
   background-color: var(--theme-background-color);
   color: var(--theme-text-color);
 }
