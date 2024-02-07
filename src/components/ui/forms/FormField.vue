@@ -6,8 +6,8 @@
   import FormLabel from './FormLabel.vue'
   import FormErrorList from './FormErrorList.vue'
   import { FormOption } from '@/types/Form.type'
-import { InputTypeHTMLAttribute } from 'vue'
-
+  import { InputTypeHTMLAttribute } from 'vue'
+  import GutterGroup from '../groups/GutterGroup.vue'
 
   defineOptions({
     inheritAttrs: false
@@ -23,17 +23,22 @@ import { InputTypeHTMLAttribute } from 'vue'
   const inputValue = defineModel<unknown>()
 
   const { class: classList, ...attrs } = useAttrs()
-const { errors, value, meta } = useField(
-  props.name,
-  props.rules,
-  {
-    initialValue: inputValue.value
-  }
-)
   const required = computed(() => {
     if (!attrs.required) return true
 
     return props.rules?.includes('required')
+  })
+  const fullRules = computed(() => {
+    const rules = props.rules?.split('|')
+    if (attrs.required && !rules?.includes('required')) {
+      rules?.push('required')
+    }
+
+    return rules?.join('|')
+  })
+
+  const { errors, value, meta } = useField(props.name, fullRules.value, {
+    initialValue: inputValue.value
   })
 
   const inputComponent = computed(() => {
@@ -48,6 +53,10 @@ const { errors, value, meta } = useField(
   const inputBoundings = computed(() => {
     const bindings = { ...attrs }
 
+    if (required.value) {
+      bindings.required = true
+    }
+
     // Use custom binding according to form input type
     if (props.type === 'select') {
       bindings.options = props.options
@@ -60,7 +69,7 @@ const { errors, value, meta } = useField(
 </script>
 
 <template>
-  <div class="field" :class="classList">
+  <GutterGroup block direction="column" class="field" :class="classList">
     <FormLabel
       :input-id="id"
       :required="required"
@@ -88,7 +97,7 @@ const { errors, value, meta } = useField(
       :errors="errors"
       class="field__errors"
     />
-  </div>
+  </GutterGroup>
 </template>
 
 <style scoped lang="scss">

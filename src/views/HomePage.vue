@@ -5,7 +5,6 @@
   import { ButtonTheme, ButtonType } from '@/vars/ButtonAttr'
   import { ref } from 'vue'
   import { useI18n } from 'vue-i18n'
-  import FormRow from '@/components/ui/forms/FormRow.vue'
   import FormField from '@/components/ui/forms/FormField.vue'
   import { useForm } from 'vee-validate'
 
@@ -53,35 +52,34 @@
         <strong>{{ t('form') }}</strong>
       </template>
       <template #default>
-        <form @submit.prevent="onSubmit">
-          <FormRow>
-            <FormRow>
-              <FormField
-                id="login_identifier"
-                :placeholder="t('login.placeholder.email')"
-                type="email"
-                name="identifier"
-                rules="email|required"
-              >
-                {{ t('login.labels.identifier') }}
-              </FormField>
-            </FormRow>
-            <FormRow>
-              <FormField
-                id="login_password"
-                :placeholder="t('login.placeholder.password')"
-                type="password"
-                name="password"
-                rules="required"
-              >
-                {{ t('login.labels.password') }}
-              </FormField>
-            </FormRow>
-            <BaseButton class="login__button" :type="ButtonType.SUBMIT" block>
-              {{ t('login.submit') }}
-            </BaseButton>
-          </FormRow>
-        </form>
+        <GutterGroup
+          tag="form"
+          block
+          direction="column"
+          @submit.prevent="onSubmit"
+        >
+          <FormField
+            id="login_identifier"
+            :placeholder="t('login.placeholder.email')"
+            type="email"
+            name="identifier"
+            rules="email|required"
+          >
+            {{ t('login.labels.identifier') }}
+          </FormField>
+          <FormField
+            id="login_password"
+            :placeholder="t('login.placeholder.password')"
+            type="password"
+            name="password"
+            rules="required"
+          >
+            {{ t('login.labels.password') }}
+          </FormField>
+          <BaseButton class="login__button" :type="ButtonType.SUBMIT" block>
+            {{ t('login.submit') }}
+          </BaseButton>
+        </GutterGroup>
       </template>
     </ModalOverlay>
   </div>
