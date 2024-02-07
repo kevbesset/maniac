@@ -5,6 +5,7 @@
   import { I18nLocale } from '@/vars/I18nAttr'
   import BemTransition from '../ui/transitions/BemTransition.vue'
   import { useTheme } from '@/libs/composables/theme'
+  import GutterGroup from '../ui/groups/GutterGroup.vue'
 
   const { t, locale } = useI18n()
 
@@ -23,14 +24,14 @@
       </BemTransition>
     </RouterView>
   </main>
-  <div class="layout__toolbox">
+  <GutterGroup class="layout__toolbox">
     <BaseButton v-bouncy icon rounded class="toggler" @click="toggleLocale">
       {{ t('locale') }}
     </BaseButton>
     <BaseButton v-bouncy icon rounded class="toggler" @click="toggleTheme">
       {{ t('theme') }}
     </BaseButton>
-  </div>
+  </GutterGroup>
 </template>
 
 <style scoped lang="scss">
@@ -42,8 +43,6 @@
 
     &__toolbox {
       position: fixed;
-      display: flex;
-      gap: 0.5em;
       bottom: 1.25em;
       right: 1.25em;
     }
