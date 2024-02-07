@@ -1,12 +1,11 @@
 <script setup lang="ts">
   import { useField } from 'vee-validate'
-  import { computed, useAttrs } from 'vue'
+  import { computed, useAttrs, InputTypeHTMLAttribute, watch } from 'vue'
   import FormFieldSelect from './fields/FormFieldSelect.vue'
   import FormFieldInput from './fields/FormFieldInput.vue'
   import FormLabel from './FormLabel.vue'
   import FormErrorList from './FormErrorList.vue'
   import { FormOption } from '@/types/Form.type'
-  import { InputTypeHTMLAttribute } from 'vue'
   import GutterGroup from '../groups/GutterGroup.vue'
 
   defineOptions({
@@ -66,6 +65,14 @@
 
     return bindings
   })
+
+  watch(value, () => {
+    inputValue.value = value.value
+  })
+
+  watch(inputValue, () => {
+    value.value = inputValue.value
+  })
 </script>
 
 <template>
@@ -104,18 +111,8 @@
   @import '@/assets/sass/placeholders/sr-only';
 
   .field {
-    &__label {
-      margin-bottom: 1em;
-
-      &--sr-only {
-        @extend %sr-only;
-      }
-    }
-
-    &__input {
-      &--error {
-        margin-bottom: 0.75em;
-      }
+    &--sr-only {
+      @extend %sr-only;
     }
   }
 </style>

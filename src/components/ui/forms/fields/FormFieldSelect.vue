@@ -33,10 +33,5 @@
 
   .input {
     @extend %form__input;
-
-    border: none;
-    background: none;
-    box-shadow: none;
-    border-radius: 0;
   }
 </style>
