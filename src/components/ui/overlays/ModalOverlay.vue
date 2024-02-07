@@ -9,7 +9,7 @@
     persistent?: boolean
   }>()
 
-  defineEmits<{
+  const emit = defineEmits<{
     (event: 'before-open'): void
     (event: 'before-close'): void
   }>()
@@ -69,6 +69,11 @@
       modalOpen.value = false
     }
   }
+
+  watch(modalOpen, () => {
+    if (modalOpen.value) emit('before-open')
+    else emit('before-close')
+  })
 </script>
 
 <template>
