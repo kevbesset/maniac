@@ -22,6 +22,8 @@
   - [Comparison with traditional UI libraries](#comparison-with-traditional-ui-libraries)
   - [Comparison with same approach libraries](#comparison-with-same-approach-libraries)
 - [Code practices](#code-practices)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Installation
 
@@ -142,3 +144,7 @@ Also, I used the power of Vue with scoped styles also to avoid any conflicts fro
 ## Contributing
 
 Maniac is open for contribution. Please read the [contributing guide](CONTRIBUTING.md)
+
+## License
+
+Licensed under the [MIT license](LICENSE.md)
