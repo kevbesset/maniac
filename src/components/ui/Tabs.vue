@@ -56,7 +56,7 @@ watch(currentTab, () => {
       </div>
     </div>
     <Card class="tabs__body">
-      <Transition :name="transitionName" mode="out-in">
+      <Transition :name="transitionName" mode="default">
         <div :key="currentTab" class="tabs__inner">
           <Component :is="bodyComponent" />
         </div>
@@ -119,12 +119,15 @@ watch(currentTab, () => {
   }
 }
 
-.transition-next {
+.transition-next,
+.transition-prev {
   &-enter-active,
   &-leave-active {
     transition: transform var(--transition);
   }
+}
 
+.transition-next {
   &-enter-from {
     transform: translate3d(100%, 0, 0);
   }
@@ -135,11 +138,6 @@ watch(currentTab, () => {
 }
 
 .transition-prev {
-  &-enter-active,
-  &-leave-active {
-    transition: transform var(--transition);
-  }
-
   &-enter-from {
     transform: translate3d(-100%, 0, 0);
   }
