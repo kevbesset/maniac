@@ -58,7 +58,7 @@ const dialogToggle = ref(false)
         </template>
       </Accordion>
     </article>
-    <h3>Alert</h3>
+    <h3>Alert <code>maniac add alert</code></h3>
     <section>
       <Alert> Lorem ipsum dolor sit amet consectetur adipisicing elit. </Alert>
       <Alert>
@@ -70,21 +70,19 @@ const dialogToggle = ref(false)
         <template #default> Lorem ipsum dolor sit amet consectetur adipisicing elit. </template>
       </Alert>
     </section>
-    <h3>Avatar</h3>
+    <h3>Avatar <code>maniac add avatar</code></h3>
     <section>
       <Avatar src="@/assets/logo.png" alt="M" />
       <Avatar alt="M" />
     </section>
-    <h3>Badge</h3>
+    <h3>Badge <code>maniac add badge</code></h3>
     <section>
       <Badge>Default</Badge>
       <Badge reverse>Reverse</Badge>
       <Badge outlined>Outlined</Badge>
       <Badge tiled>Tiled</Badge>
     </section>
-    <h3>Breadcrumb</h3>
-    <section></section>
-    <h3>Button</h3>
+    <h3>Button <code>maniac add button</code></h3>
     <section>
       <Button>Default</Button>
       <Button reverse>Reverse</Button>
@@ -96,9 +94,7 @@ const dialogToggle = ref(false)
       <Button discrete>Discrete</Button>
       <Button block>Block button</Button>
     </section>
-    <h3>Calendar</h3>
-    <section></section>
-    <h3>Card</h3>
+    <h3>Card <code>maniac add card</code></h3>
     <section>
       <Card>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam repellendus at fugiat
@@ -118,17 +114,7 @@ const dialogToggle = ref(false)
         </template>
       </Card>
     </section>
-    <h3>Checkbox</h3>
-    <section></section>
-    <h3>Combobox</h3>
-    <section></section>
-    <h3>Context menu</h3>
-    <section></section>
-    <h3>Data table</h3>
-    <section></section>
-    <h3>Date picker</h3>
-    <section></section>
-    <h3>Dialog</h3>
+    <h3>Dialog <code>maniac add dialog</code></h3>
     <section
       :style="{
         overflow: 'hidden'
@@ -142,62 +128,16 @@ const dialogToggle = ref(false)
         <Button block @click="dialogToggle = false">Close dialog</Button>
       </Dialog>
     </section>
-    <h3>Drawer</h3>
-    <section></section>
-    <h3>Dropdown menu</h3>
-    <section></section>
-    <h3>Form</h3>
-    <section></section>
-    <h3>Hover card</h3>
-    <section></section>
-    <h3>Icon</h3>
+    <h3>Icon <code>maniac add icon</code></h3>
     <section>
       <Icon name="app_badging" />
       <Icon name="app_badging" fill />
     </section>
-    <h3>Image</h3>
+    <h3>Image <code>maniac add image</code></h3>
     <section>
       <Image src="@/assets/logo.png" alt="Maniac logo" />
     </section>
-    <h3>Input</h3>
-    <section></section>
-    <h3>Input OTP</h3>
-    <section></section>
-    <h3>Label</h3>
-    <section></section>
-    <h3>Menubar</h3>
-    <section></section>
-    <h3>Navigation menu</h3>
-    <section></section>
-    <h3>Pagination</h3>
-    <section></section>
-    <h3>Popover</h3>
-    <section></section>
-    <h3>Progress</h3>
-    <section></section>
-    <h3>RadioGroup</h3>
-    <section></section>
-    <h3>Resizable</h3>
-    <section></section>
-    <h3>Scroll area</h3>
-    <section></section>
-    <h3>Select</h3>
-    <section></section>
-    <h3>Separator</h3>
-    <section></section>
-    <h3>Sheet</h3>
-    <section></section>
-    <h3>Skeleton</h3>
-    <section></section>
-    <h3>Slider</h3>
-    <section></section>
-    <h3>Sonner</h3>
-    <section></section>
-    <h3>Switch</h3>
-    <section></section>
-    <h3>Table</h3>
-    <section></section>
-    <h3>Tabs</h3>
+    <h3>Tabs <code>maniac add tabs</code></h3>
     <section>
       <Tabs>
         <div tab="Tab 1">
@@ -218,16 +158,6 @@ const dialogToggle = ref(false)
         </div>
       </Tabs>
     </section>
-    <h3>Textarea</h3>
-    <section></section>
-    <h3>Toast</h3>
-    <section></section>
-    <h3>Toggle</h3>
-    <section></section>
-    <h3>Toggle group</h3>
-    <section></section>
-    <h3>Tooltip</h3>
-    <section></section>
   </main>
 </template>
 
@@ -258,7 +188,7 @@ h2 {
 h3 {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  gap: 1em;
   font-weight: bold;
   text-transform: uppercase;
 }
