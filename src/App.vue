@@ -1,14 +1,18 @@
 <script setup lang="ts">
-import Accordion from './components/ui/Accordion.vue'
-import AccordionGroup from './components/ui/AccordionGroup.vue'
-import Alert from './components/ui/Alert.vue'
-import Avatar from './components/ui/Avatar.vue'
-import Badge from './components/ui/Badge.vue'
-import Button from './components/ui/Button.vue'
-import Card from './components/ui/Card.vue'
-import Icon from './components/ui/Icon.vue'
-import Image from './components/ui/Image.vue'
-import Tabs from './components/ui/Tabs.vue'
+import { ref } from 'vue'
+import Accordion from '@/components/ui/Accordion.vue'
+import AccordionGroup from '@/components/ui/AccordionGroup.vue'
+import Alert from '@/components/ui/Alert.vue'
+import Avatar from '@/components/ui/Avatar.vue'
+import Badge from '@/components/ui/Badge.vue'
+import Button from '@/components/ui/Button.vue'
+import Card from '@/components/ui/Card.vue'
+import Icon from '@/components/ui/Icon.vue'
+import Image from '@/components/ui/Image.vue'
+import Tabs from '@/components/ui/Tabs.vue'
+import Dialog from '@/components/ui/Dialog.vue'
+
+const dialogToggle = ref(false)
 </script>
 
 <template>
@@ -125,7 +129,19 @@ import Tabs from './components/ui/Tabs.vue'
     <h3>Date picker</h3>
     <section></section>
     <h3>Dialog</h3>
-    <section></section>
+    <section
+      :style="{
+        overflow: 'hidden'
+      }"
+    >
+      <Button block @click="dialogToggle = true"> Open dialog </Button>
+      <Dialog v-model="dialogToggle">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut, sint obcaecati. Nemo id
+        repellat ex numquam perferendis modi qui, voluptate quisquam atque blanditiis necessitatibus
+        provident eum cupiditate unde, incidunt ipsum.
+        <Button block @click="dialogToggle = false">Close dialog</Button>
+      </Dialog>
+    </section>
     <h3>Drawer</h3>
     <section></section>
     <h3>Dropdown menu</h3>

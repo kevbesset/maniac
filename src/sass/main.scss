@@ -11,6 +11,12 @@ body {
   line-height: 1.5;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  scrollbar-width: thin;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body:has(dialog[open]) {
+  overflow: hidden;
+  overscroll-behavior: contain;
 }

@@ -26,6 +26,8 @@ defineProps<{
 }
 
 .icon {
+  line-height: 1em;
+
   &::before {
     content: attr(data-icon);
     vertical-align: middle;

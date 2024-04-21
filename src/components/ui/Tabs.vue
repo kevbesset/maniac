@@ -2,13 +2,12 @@
 import useTracer from '@/libs/uses/useTracer'
 import { computed, onMounted, ref, useSlots, watch } from 'vue'
 import Card from '@/components/ui/Card.vue'
-import BemTransition from '@/components/ui/BemTransition.vue'
 
 const tabs = computed(() => slots.default?.().map(({ props }) => props?.tab))
 
 const listRef = ref()
 const currentTab = ref()
-const transitionName = ref('tabs-next')
+const transitionName = ref('transition-next')
 
 const slots = useSlots()
 const { styles, refresh } = useTracer(listRef, '.tabs__item--active')
@@ -22,7 +21,7 @@ const currentTabIndex = computed(
 
 function handleTabChange(nextTab: string) {
   const tabIndex = tabs.value?.findIndex((tab) => tab === nextTab) || 0
-  transitionName.value = tabIndex < currentTabIndex.value ? 'tabs-prev' : 'tabs-next'
+  transitionName.value = tabIndex < currentTabIndex.value ? 'transition-prev' : 'transition-next'
   currentTab.value = nextTab
 }
 
@@ -57,11 +56,11 @@ watch(currentTab, () => {
       </div>
     </div>
     <Card class="tabs__body">
-      <BemTransition :name="transitionName">
+      <Transition :name="transitionName" mode="out-in">
         <div :key="currentTab" class="tabs__inner">
           <Component :is="bodyComponent" />
         </div>
-      </BemTransition>
+      </Transition>
     </Card>
   </div>
 </template>
@@ -120,33 +119,32 @@ watch(currentTab, () => {
   }
 }
 
-.tabs,
-.tabs-next {
-  &--enter-active,
-  &--leave-active {
+.transition-next {
+  &-enter-active,
+  &-leave-active {
     transition: transform var(--transition);
   }
 
-  &--enter-from {
+  &-enter-from {
     transform: translate3d(100%, 0, 0);
   }
 
-  &--leave-to {
+  &-leave-to {
     transform: translate3d(-100%, 0, 0);
   }
 }
 
-.tabs-prev {
-  &--enter-active,
-  &--leave-active {
+.transition-prev {
+  &-enter-active,
+  &-leave-active {
     transition: transform var(--transition);
   }
 
-  &--enter-from {
+  &-enter-from {
     transform: translate3d(-100%, 0, 0);
   }
 
-  &--leave-to {
+  &-leave-to {
     transform: translate3d(100%, 0, 0);
   }
 }

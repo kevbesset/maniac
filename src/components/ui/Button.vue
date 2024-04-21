@@ -67,11 +67,11 @@ const tag = computed(() => {
   transition: all var(--transition);
 
   &:hover {
-    background-color: hsl(var(--buttonColorBackground) / 0.9);
+    background-color: hsl(var(--buttonColorBackground) / 0.8);
   }
 
   &:active {
-    transform: scale(0.9);
+    background-color: hsl(var(--buttonColorBackground));
   }
 
   &--disabled {

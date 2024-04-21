@@ -14,14 +14,15 @@ export default {
   badge: {
     files: ['components/ui/Badge.vue']
   },
-  bemTransition: {
-    files: ['components/ui/BemTransition.vue']
-  },
   button: {
     files: ['components/ui/Button.vue', 'libs/vars/ButtonAttr.ts']
   },
   card: {
     files: ['components/ui/Card.vue']
+  },
+  dialog: {
+    required: ['icon'],
+    files: ['components/ui/Dialog.vue']
   },
   icon: {
     files: ['components/ui/Icon.vue']
@@ -30,7 +31,7 @@ export default {
     files: ['components/ui/Image.vue']
   },
   tabs: {
-    required: ['tools/tracer', 'card', 'bemTransition'],
+    required: ['tools/tracer', 'card'],
     files: ['components/ui/Tabs.vue']
   },
   'tools/tracer': {
