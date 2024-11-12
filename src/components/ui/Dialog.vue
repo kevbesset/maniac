@@ -83,20 +83,31 @@ onUnmounted(() => {
   max-width: none;
   max-height: none;
   overflow: hidden;
-  background-color: hsl(var(--colorText) / 0.8);
-  backdrop-filter: blur(0.25em);
   display: flex;
   align-items: center;
   justify-content: center;
+  background: none;
+  backdrop-filter: blur(0.25em);
 
   &::backdrop {
     display: none;
   }
 
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: color-mix(in oklch, var(--colorBackground), var(--colorText) 40%);
+    opacity: 0.5;
+  }
+
   &__body {
     position: relative;
-    border: 1px solid hsl(var(--colorBorder));
-    background-color: hsl(var(--colorBackground));
+    border: 1px solid var(--colorBorder);
+    background-color: var(--colorBackground);
     border-radius: var(--borderRadius);
     box-shadow: var(--shadow);
     padding: 1.5em;

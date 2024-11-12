@@ -3,8 +3,8 @@
 
 html,
 body {
-  background-color: hsl(var(--colorBackground));
-  color: hsl(var(--colorText));
+  background-color: var(--colorBackground);
+  color: var(--colorText);
   font-size: 1em;
   font-family: var(--font);
   font-weight: normal;

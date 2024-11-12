@@ -28,7 +28,7 @@ defineProps<{
   align-items: baseline;
   gap: 0.5em;
   width: 100%;
-  border: 1px solid hsl(var(--colorBorder));
+  border: 1px solid var(--colorBorder);
   border-radius: var(--borderRadius);
   padding: 1em;
 

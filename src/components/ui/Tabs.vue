@@ -71,7 +71,7 @@ watch(currentTab, () => {
 
   &__header {
     position: relative;
-    background-color: hsl(var(--colorMuted));
+    background-color: var(--colorMuted);
     border-radius: var(--borderRadius);
     padding: 0.25em;
     margin-bottom: 0.5em;
@@ -99,6 +99,7 @@ watch(currentTab, () => {
 
     &--active {
       pointer-events: none;
+      color: var(--colorText);
     }
   }
 
@@ -107,7 +108,7 @@ watch(currentTab, () => {
     bottom: 0.25em;
     left: 0.25em;
     height: calc(100% - 0.5em);
-    background-color: hsl(var(--colorBackground));
+    background-color: var(--colorBackground);
     border-radius: var(--borderRadius);
     transition: all var(--transition);
     box-shadow: var(--shadow);

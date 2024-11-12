@@ -58,7 +58,7 @@ function toggleExpansion() {
 .accordion {
   $blockSelector: &;
   width: 100%;
-  border-bottom: 1px solid hsl(var(--colorBorder));
+  border-bottom: 1px solid var(--colorBorder);
 
   &__trigger {
     display: flex;

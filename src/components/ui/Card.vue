@@ -30,7 +30,7 @@ const slots = useSlots()
 <style scoped lang="scss">
 .card {
   padding: 1.5em;
-  border: 1px solid hsl(var(--colorBorder));
+  border: 1px solid var(--colorBorder);
   border-radius: var(--borderRadius);
   display: inline-flex;
   flex-direction: column;
@@ -44,7 +44,7 @@ const slots = useSlots()
 
   &__subtitle {
     font-size: 0.875em;
-    color: hsl(var(--colorText--muted));
+    color: var(--colorText--muted);
   }
 
   &__footer {

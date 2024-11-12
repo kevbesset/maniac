@@ -1,10 +1,10 @@
 :root {
   // Colors
-  --colorBackground: 0 0% 98%;
-  --colorMuted: 240 4.8% 95.9%;
-  --colorText: 240 10% 3.9%;
-  --colorText--muted: var(--colorText) / 0.6;
-  --colorBorder: var(--colorText) / 0.1;
+  --colorBackground: #fafafa;
+  --colorMuted: #f4f4f5;
+  --colorText: #0a0a0b;
+  --colorText--muted: color-mix(in oklch, var(--colorBackground), var(--colorText) 40%);
+  --colorBorder: color-mix(in oklch, var(--colorBackground), var(--colorText) 10%);
   --colorShadow: rgba(black, 0.05);
 
   // Typographies
@@ -23,9 +23,9 @@
 @media (prefers-color-scheme: dark) {
   :root {
     // Backgrounds
-    --colorBackground: 240 10% 3.9%;
+    --colorBackground: #0a0a0b;
 
     // Texts
-    --colorText: 0 0% 98%;
+    --colorText: #fafafa;
   }
 }

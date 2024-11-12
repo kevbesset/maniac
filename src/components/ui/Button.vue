@@ -62,16 +62,16 @@ const tag = computed(() => {
   cursor: pointer;
   appearance: button;
   font-weight: normal;
-  background: hsl(var(--buttonColorBackground));
-  color: hsl(var(--buttonColorText));
+  background: var(--buttonColorBackground);
+  color: var(--buttonColorText);
   transition: all var(--transition);
 
   &:hover {
-    background-color: hsl(var(--buttonColorBackground) / 0.8);
+    background-color: color-mix(in oklch, var(--buttonColorText), var(--buttonColorBackground) 60%);
   }
 
   &:active {
-    background-color: hsl(var(--buttonColorBackground));
+    background-color: var(--buttonColorBackground);
   }
 
   &--disabled {
@@ -84,11 +84,15 @@ const tag = computed(() => {
   }
 
   &--reverse {
-    background-color: hsl(var(--buttonColorText));
-    color: hsl(var(--buttonColorBackground));
+    background-color: var(--buttonColorText);
+    color: var(--buttonColorBackground);
 
     &:hover {
-      background-color: hsl(var(--buttonColorBackground) / 0.1);
+      background-color: color-mix(
+        in oklch,
+        var(--buttonColorText),
+        var(--buttonColorBackground) 10%
+      );
     }
   }
 
@@ -97,7 +101,7 @@ const tag = computed(() => {
   }
 
   &--outlined {
-    border: 1px solid hsl(var(--colorBorder));
+    border: 1px solid var(--colorBorder);
   }
 
   &--tiled {
@@ -111,10 +115,14 @@ const tag = computed(() => {
 
   &--discrete {
     background-color: transparent;
-    color: hsl(var(--colorText));
+    color: var(--colorText);
 
     &:hover {
-      background-color: hsl(var(--buttonColorBackground) / 0.1);
+      background-color: color-mix(
+        in oklch,
+        var(--buttonColorText),
+        var(--buttonColorBackground) 10%
+      );
     }
   }
 }

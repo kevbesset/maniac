@@ -202,9 +202,10 @@ h4 {
 code {
   font-size: 0.75em;
   text-transform: none;
-  background-color: hsl(var(--colorBorder));
+  background-color: var(--colorBorder);
+  color: var(--colorText);
   padding: 0.5em 1em;
-  border-radius: 0.5em;
+  border-radius: var(--borderRadius);
   font-family:
     ui-monospace,
     SFMono-Regular,
@@ -229,7 +230,7 @@ section {
 
   &:empty::before {
     content: '🚧 Work in progress 🚧';
-    border: 1px solid hsl(var(--colorBorder));
+    border: 1px solid var(--colorBorder);
     border-radius: var(--borderRadius);
     padding: 1em;
     width: 100%;
